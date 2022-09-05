@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.Interface">
+  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="10" width="828" height="518"/>
+    </constraints>
+    <properties>
+      <font name="Garamond"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <hspacer id="5ac70">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="4" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <grid id="6c164" layout-manager="GridLayoutManager" row-count="3" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <vspacer id="a5aa1">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <component id="35d29" class="javax.swing.JButton" binding="addVehicleButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Add Vehicle"/>
+              <toolTipText value="Add a vehicle to specified dealership"/>
+            </properties>
+          </component>
+          <component id="5f078" class="javax.swing.JButton" binding="enableDisableAcquisitionButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Enable/Disable Acquisition"/>
+              <toolTipText value="Enable/Disable acquisition of cars for specified dealer"/>
+            </properties>
+          </component>
+          <component id="dc457" class="javax.swing.JButton" binding="listVehiclesButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="List Vehicles"/>
+              <toolTipText value="List all vehicles of current dealership"/>
+            </properties>
+          </component>
+          <component id="1112" class="javax.swing.JComboBox" binding="selectDealer">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="Select a dealership"/>
+              </model>
+              <toolTipText value="Select the dealership"/>
+            </properties>
+          </component>
+          <component id="c3ce6" class="javax.swing.JButton" binding="exportToJSONButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Export to JSON"/>
+              <toolTipText value="Export all vehicles and dealerships to new JSON file"/>
+            </properties>
+          </component>
+          <component id="be484" class="javax.swing.JButton" binding="chooseInputFileButton" default-binding="true">
+            <constraints>
+              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Choose input file"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="28274" class="javax.swing.JTextArea" binding="outputOfDealershipVehiclesTextArea" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="400"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Output of dealership vehicles will be shown here"/>
+          <wrapStyleWord value="true"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
