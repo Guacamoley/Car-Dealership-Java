@@ -5,8 +5,8 @@
  * Professor Tim Carlson
  */
 
-import GUI.Interface;
-
+//import GUI.Interface;
+import GUI.*;
 // Main runner class for project
 public class Main {
 
