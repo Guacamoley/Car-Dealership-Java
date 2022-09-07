@@ -17,4 +17,3 @@ public class Main {
 }
 
 
-//My name is Rodnee Yang and this is my first commit
