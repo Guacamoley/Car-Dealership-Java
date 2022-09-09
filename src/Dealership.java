@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Dealership {
     /*
     * TODO:
@@ -14,4 +17,21 @@ public class Dealership {
     *   +toString()
     *   +getters() & setters()
     * */
+	
+	// fields
+	private List<Car> cars;
+	
+	// constructors
+	public Dealership() {
+		cars = new ArrayList<Car>();
+	}
+	
+	// methods
+	public List<Car> getCars(){
+		return cars;
+	}
+	
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
+	}
 }
