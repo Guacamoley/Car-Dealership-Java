@@ -36,12 +36,12 @@ public class Main {
 
 
                 //Extract data
-                String dealershipID = null;
+               String dealershipID = null;
                 String vehicleType = null;
-                String vehicleManu = carJsonObject.get("vehicle_manufacturer").getAsString();
-                String vehicleModel = carJsonObject.get("vehicle_model").getAsString();
-                String vehicleID = carJsonObject.get("vehicle_id").getAsString();
-                Double price = carJsonObject.get("price").getAsDouble();
+                String vehicleManu = null;
+                String vehicleModel = null;
+                String vehicleID = null;
+                Double price = null;
                 long acquisitionDate = carJsonObject.get("acquisition_date").getAsLong();
 
                 //Construct Long
