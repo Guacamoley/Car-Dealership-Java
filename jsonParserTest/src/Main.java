@@ -58,6 +58,9 @@ public class Main {
                 if(carJsonObject.has("vehicle_type")) {
                     vehicleType = carJsonObject.get("vehicle_type").getAsString();
                 }
+                if(carJsonObject.has("vehicle_model")) {
+                    vehicleModel = carJsonObject.get("vehicle_model").getAsString();
+                }
                 if(carJsonObject.has("vehicle_manufacturer")) {
                     vehicleManu = carJsonObject.get("vehicle_manufacturer").getAsString();
                 }
