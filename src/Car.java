@@ -16,13 +16,13 @@
     * */
 
     public class Car { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
-        String dealership_id;
-        String vehicle_type;
-        String vehicle_manufacturer;
-        String vehicle_model;
-        String vehicle_id;
-        Double price; //Determine the right data type for this and date below
-        long acquisition_date;
+     private String dealership_id;
+     private String vehicle_type;
+     private String vehicle_manufacturer;
+     private String vehicle_model;
+     private String vehicle_id;
+     private Double price;
+     private long acquisition_date;
 
 
         public Car(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, Double price, long acquisition_date) {
@@ -94,13 +94,13 @@
         @Override
         public String toString() {
             return "Car{" +
-                    "dealership_id='" + dealership_id + '\'' +
-                    ", vehicle_type='" + vehicle_type + '\'' +
-                    ", vehicle_manufacturer='" + vehicle_manufacturer + '\'' +
-                    ", vehicle_model='" + vehicle_model + '\'' +
-                    ", vehicle_id='" + vehicle_id + '\'' +
-                    ", price=" + price +
-                    ", acquisition_date=" + acquisition_date +
+                    "dealership_id='" + dealership_id + '\n' +
+                    ", vehicle_type='" + vehicle_type + '\n' +
+                    ", vehicle_manufacturer='" + vehicle_manufacturer + '\n' +
+                    ", vehicle_model='" + vehicle_model + '\n' +
+                    ", vehicle_id='" + vehicle_id + '\n' +
+                    ", price=" + price + '\n' +
+                    ", acquisition_date=" + acquisition_date + '\n' +
                     '}';
         }
     }
