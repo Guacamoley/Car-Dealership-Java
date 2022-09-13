@@ -6,7 +6,8 @@
  */
 
 //import GUI.Interface;
-import GUI.*;
+
+import GUI.Interface;
 
 // Main runner class for project
 public class Main {
@@ -14,8 +15,6 @@ public class Main {
     public static void main(String[] args) {
         // Creates a new user interface for interaction
         new Interface().createInterface();
-
-
 
 
         /*
