@@ -72,6 +72,7 @@ public class DealershipController {
 		// if none exists, create dealership with that ID
 		if (currentDealership == null) {
 			currentDealership = new Dealership(currentDealershipId);
+			dealerships.add(currentDealership);
 		}
 
 		// check if dealership is able to acquire cars
