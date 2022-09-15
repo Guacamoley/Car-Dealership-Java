@@ -18,15 +18,31 @@ public class Dealership {
     *   +getters() & setters()
     * */
 	
-	// fields
-	private List<Car> cars;
+	/*
+	 *  Note: it was necessary to add the following skeleton code in order 
+	 *  to start building the DealershipController class.
+	 */
 	
-	// constructors
-	public Dealership() {
+	// FIELDS
+	
+	private List<Car> cars;
+	private String dealershipId;
+	private boolean acquireEnabled;
+	
+	// CONSTRUCTORS
+	
+	public Dealership(String dealershipId) {
 		cars = new ArrayList<Car>();
+		this.dealershipId = dealershipId;
+		acquireEnabled = true;
 	}
 	
-	// methods
+	// METHODS
+	
+	public void addCar(Car car) {
+		cars.add(car);
+	}
+	
 	public List<Car> getCars(){
 		return cars;
 	}
@@ -34,4 +50,33 @@ public class Dealership {
 	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
+
+	/**
+	 * @return the dealershipId
+	 */
+	public String getDealershipId() {
+		return dealershipId;
+	}
+
+	/**
+	 * @param dealershipId the dealershipId to set
+	 */
+	public void setDealershipId(String dealershipId) {
+		this.dealershipId = dealershipId;
+	}
+
+	/**
+	 * @return the canAcquire
+	 */
+	public boolean isAcquireEnabled() {
+		return acquireEnabled;
+	}
+
+	/**
+	 * @param canAcquire the canAcquire to set
+	 */
+	public void setAcquireEnabled(boolean acquireEnabled) {
+		this.acquireEnabled = acquireEnabled;
+	}
+	
 }
