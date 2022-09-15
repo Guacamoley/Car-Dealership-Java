@@ -1,28 +1,28 @@
 
     /*
-    * TODO:
-    * Attributes:
-    *   -vehicleID
-    *   -manufacturer
-    *   -model
-    *   -acquisitionDate
-    *   -price
-    *   -vehicleType
-    *   -dealershipID
-    *
-    * Methods:
-    *   +getters() & setters()
-    *   +toString()
-    * */
+     * TODO:
+     * Attributes:
+     *   -vehicleID
+     *   -manufacturer
+     *   -model
+     *   -acquisitionDate
+     *   -price
+     *   -vehicleType
+     *   -dealershipID
+     *
+     * Methods:
+     *   +getters() & setters()
+     *   +toString()
+     * */
 
     public class Car { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
-     private String dealership_id;
-     private String vehicle_type;
-     private String vehicle_manufacturer;
-     private String vehicle_model;
-     private String vehicle_id;
-     private Double price;
-     private long acquisition_date;
+        private String dealership_id;
+        private String vehicle_type;
+        private String vehicle_manufacturer;
+        private String vehicle_model;
+        private String vehicle_id;
+        private Double price;
+        private long acquisition_date;
 
 
         public Car(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, Double price, long acquisition_date) {
