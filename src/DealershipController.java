@@ -110,7 +110,7 @@ public class DealershipController {
 	 *         entries, then those will not be added, but they will also not appear
 	 *         on the invalid list.
 	 */
-	public List<Car> addCar(List<Car> cars) {
+	public List<Car> addCars(List<Car> cars) {
 		// the list of invalid cars to be returned
 		List<Car> invalidCars = new ArrayList<Car>();
 
@@ -127,5 +127,15 @@ public class DealershipController {
 		}
 
 		return invalidCars;
+	}
+	
+	public void setDealershipAcquireEnabled(String dealershipId, boolean acquireEnabled) {
+		Dealership dealership = findDealershipById(dealershipId);
+		dealership.setAcquireEnabled(acquireEnabled);
+	}
+	
+	public List<Car> getDealershipCars(String dealershipId) {
+		Dealership dealership = findDealershipById(dealershipId);
+		return dealership.getCars();
 	}
 }
