@@ -14,17 +14,18 @@ public class Main {
 
     public static void main(String[] args) {
         // Creates a new user interface for interaction
+        /*
         new Interface().createInterface();
 
+    */
 
-        /*
-        -Put the interface above into comments and undo this comment to print everything from JSON file
+        //-Put the interface above into comments and undo this comment to print everything from JSON file
 
         Json c = new Json();
 
         c.readFile();
 
-        */
+
 
 
     }
