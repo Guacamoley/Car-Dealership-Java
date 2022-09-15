@@ -30,7 +30,7 @@ public class Main {
             List<Car> cars = new ArrayList<>();
 
             for(JsonElement carElement : jsonArrayOfCars){
-                //Get the Json Object:
+                //Get the DealershipSystem.Json Object:
                 JsonObject carJsonObject = carElement.getAsJsonObject();
 
 
@@ -93,10 +93,10 @@ public class Main {
             //console print
             System.out.println("Entire car inventory: " + cars);
             //calling a specific car and it's associated data
-            System.out.println("Car 2: " + cars.get(2));
+            System.out.println("DealershipSystem.Car 2: " + cars.get(2));
             //Querying specific stuff example
             String carTwoDealershipID = cars.get(2).dealership_id;
-            System.out.println("Car 2 Dealership ID: " + carTwoDealershipID);
+            System.out.println("DealershipSystem.Car 2 DealershipSystem.Dealership ID: " + carTwoDealershipID);
 
 
         //Error for input file

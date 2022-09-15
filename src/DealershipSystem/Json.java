@@ -1,3 +1,5 @@
+package DealershipSystem;
+
 import com.google.gson.*;
 
 import java.io.File;
@@ -14,11 +16,12 @@ public class Json {
      * */
 
     //File Reader
-    File fileInput = new File("resources/input.json");
+    //File fileInput = new File("resources/input.json");
 
     JsonElement fileElement;
 
-    public void readFile() {
+    public List<Car> readFile(File fileInput) {
+        List<Car> cars = new ArrayList<>();
         {
             try {
                 fileElement = JsonParser.parseReader(new FileReader(fileInput));
@@ -26,10 +29,9 @@ public class Json {
 
                 //Process all cars
                 JsonArray jsonArrayOfCars = fileObject.get("car_inventory").getAsJsonArray();
-                List<Car> cars = new ArrayList<>();
 
                 for (JsonElement carElement : jsonArrayOfCars) {
-                    //Get the Json Object:
+                    //Get the DealershipSystem.Json Object:
                     JsonObject carJsonObject = carElement.getAsJsonObject();
 
 
@@ -82,6 +84,7 @@ public class Json {
                 }
                 //This is temporary and only for testing purposes
                 System.out.println(cars);
+                System.out.println(fileInput);
 
                 //Error for input file if DNE
             } catch (FileNotFoundException e) {
@@ -95,6 +98,7 @@ public class Json {
             }
 
         }
+        return cars;
     }
 
     public void exportFile() {

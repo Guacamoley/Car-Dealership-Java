@@ -1,5 +1,5 @@
-
-    /*
+package DealershipSystem;
+/*
      * TODO:
      * Attributes:
      *   -vehicleID
@@ -93,7 +93,7 @@
 
         @Override
         public String toString() {
-            return "Car{" +
+            return "DealershipSystem.Car{" +
                     "dealership_id='" + dealership_id + '\n' +
                     ", vehicle_type='" + vehicle_type + '\n' +
                     ", vehicle_manufacturer='" + vehicle_manufacturer + '\n' +

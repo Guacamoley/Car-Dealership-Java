@@ -1,3 +1,5 @@
+package DealershipSystem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class Dealership {
 	
 	/*
 	 *  Note: it was necessary to add the following skeleton code in order 
-	 *  to start building the DealershipController class.
+	 *  to start building the DealershipSystem.DealershipController class.
 	 */
 	
 	// FIELDS
