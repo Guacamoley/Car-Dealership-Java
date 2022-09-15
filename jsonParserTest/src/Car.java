@@ -78,7 +78,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
+        return "DealershipSystem.Car{" +
                 "dealership_id='" + dealership_id + '\'' +
                 ", vehicle_type='" + vehicle_type + '\'' +
                 ", vehicle_manufacturer='" + vehicle_manufacturer + '\'' +

@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import DealershipSystem.*;
+
 
 public class Interface {
     private JPanel panelMain;
@@ -19,6 +21,8 @@ public class Interface {
     private JRadioButton enableRadioButton;
     private JRadioButton disableRadioButton;
     private ButtonGroup acquisitionGroup;
+
+    public Inventory i = new Inventory();
 
     public Interface() {
         dealershipSelector.addActionListener(new ActionListener() {
@@ -70,6 +74,9 @@ public class Interface {
                 JFileChooser fc = new JFileChooser();
                 fc.setCurrentDirectory(new File("."));
                 fc.showOpenDialog(panelMain);
+                File file = fc.getSelectedFile();
+                i.importFile(file);
+
                 /*
                  * TODO: Try and catch files that may not be the right type, empty, nonexistent file etc.
                  *  */

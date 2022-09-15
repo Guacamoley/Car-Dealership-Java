@@ -1,3 +1,5 @@
+package DealershipSystem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,11 +94,9 @@ public class DealershipController {
 	 * @return the first dealership with matching id, or null if none exists.
 	 */
 	private Dealership findDealershipById(String dealershipId) {
-		if (dealershipId != null) {
-			for (int i = 0; i < dealerships.size(); i++) {
-				if (dealerships.get(i).getDealershipId().equals(dealershipId)) {
-					return dealerships.get(i);
-				}
+		for (int i = 0; i < dealerships.size(); i++) {
+			if (dealerships.get(i).getDealershipId().equals(dealershipId)) {
+				return dealerships.get(i);
 			}
 		}
 		return null;
@@ -116,18 +116,15 @@ public class DealershipController {
 		// the list of invalid cars to be returned
 		List<Car> invalidCars = new ArrayList<Car>();
 
-		if (cars != null) {
-		
-			// for each car in list, addCar(car)
-			for (int i = 0; i < cars.size(); i++) {
-	
-				// addCar method will return any invalidCars, so they must be collected here
-				Car invalidCar = addCar(cars.get(i));
-	
-				// if non-null object is returned, add to invalidCars list
-				if (invalidCar != null) {
-					invalidCars.add(invalidCar);
-				}
+		// for each car in list, addCar(car)
+		for (int i = 0; i < cars.size(); i++) {
+
+			// addCar method will return any invalidCars, so they must be collected here
+			Car invalidCar = addCar(cars.get(i));
+
+			// if non-null object is returned, add to invalidCars list
+			if (invalidCar != null) {
+				invalidCars.add(invalidCar);
 			}
 		}
 
@@ -136,19 +133,11 @@ public class DealershipController {
 	
 	public void setDealershipAcquireEnabled(String dealershipId, boolean acquireEnabled) {
 		Dealership dealership = findDealershipById(dealershipId);
-		if (dealership != null) {
-			dealership.setAcquireEnabled(acquireEnabled);
-		}
+		dealership.setAcquireEnabled(acquireEnabled);
 	}
 	
 	public List<Car> getDealershipCars(String dealershipId) {
 		Dealership dealership = findDealershipById(dealershipId);
-		if (dealership != null) {
-			return dealership.getCars();
-		}
-		else {
-			// returns empty list if no dealership id provided
-			return new ArrayList<Car>();
-		}
+		return dealership.getCars();
 	}
 }

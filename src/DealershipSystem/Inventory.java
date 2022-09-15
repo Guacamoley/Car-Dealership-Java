@@ -1,10 +1,13 @@
+package DealershipSystem;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class represents an inventory of cars distributed across multiple
  * dealerships. The public methods represent the fundamental functional
- * requirements. New car additions are handled using a DealershipController,
+ * requirements. New car additions are handled using a DealershipSystem.DealershipController,
  * which controls a particular list of dealerships ensuring that cars are added
  * to the correct dealership.
  * 
@@ -12,6 +15,8 @@ import java.util.List;
  *
  */
 public class Inventory {
+	Json c = new Json();
+
 
 	// FIELDS
 
@@ -29,10 +34,10 @@ public class Inventory {
 
 	// METHODS
 
-	public void importFile() {
+	public void importFile(File file) {
 		// TODO
 		// somehow retrieve the list of cars to be added
-		List<Car> importedList = new ArrayList<Car>();
+		List<Car> importedList = c.readFile(file);
 
 		// add the list of cars and record a list of all cars that failed to add
 		List<Car> failList = dc.addCars(importedList);
@@ -91,7 +96,7 @@ public class Inventory {
 
 	public void exportFile(String dealershipId) {
 		// TODO, sample code:
-		// List<Car> myList = getDealershipCars(String dealershipId);
+		// List<DealershipSystem.Car> myList = getDealershipCars(String dealershipId);
 	}
 
 	/**
