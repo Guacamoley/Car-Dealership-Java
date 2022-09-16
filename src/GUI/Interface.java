@@ -47,6 +47,14 @@ public class Interface {
                  * TODO: For selected dealership, when button is pressed, a vehicle can be added to that specified
                  *  dealership. WIP on how the vehicle will be added (either via json file upload or manual entry.
                  *  */
+            	
+            	// TODO: remove this, temporary testing
+            	// when you click "Add Vehicle", it should display all dealership id numbers in console.
+            	// you'll need to import a json file first.
+            	java.util.List<String> stuff = i.getAllDealershipIds();
+            	for (String s : stuff) {
+            		System.out.println(s);
+            	}
             }
         });
         listVehiclesButton.addActionListener(new ActionListener() {

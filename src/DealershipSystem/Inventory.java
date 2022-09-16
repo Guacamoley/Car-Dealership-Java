@@ -53,12 +53,7 @@ public class Inventory {
 	 * @return list of all dealership id's
 	 */
 	public List<String> getAllDealershipIds() {
-		List<String> dealershipIds = new ArrayList<String>();
-		List<Dealership> dealerships = dc.getDealerships();
-		for (int i = 0; i < dealerships.size(); i++) {
-			dealershipIds.add(dealerships.get(i).getDealershipId());
-		}
-		return dealershipIds;
+		return dc.getDealershipIds();
 	}
 
 	/**
