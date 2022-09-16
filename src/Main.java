@@ -11,6 +11,8 @@ import DealershipSystem.Inventory;
 import DealershipSystem.Json;
 import GUI.Interface;
 
+import java.io.File;
+
 // Main runner class for project
 public class Main {
 
@@ -21,6 +23,10 @@ public class Main {
 
 		// Creates a new user interface for interaction
 		new Interface().createInterface();
+		//Inventory s = new Inventory();
+		//s.importFile(new File("resources/input.json"));
+		//s.getAllDealershipIds();
+
 
 		// -Put the interface above into comments and undo this comment to print
 		// everything from JSON file

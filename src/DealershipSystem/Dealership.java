@@ -28,7 +28,7 @@ public class Dealership {
 	// FIELDS
 	
 	private List<Car> cars;
-	private String dealershipId;
+	private final String dealershipId;
 	private boolean acquireEnabled;
 	
 	// CONSTRUCTORS
@@ -58,13 +58,6 @@ public class Dealership {
 	 */
 	public String getDealershipId() {
 		return dealershipId;
-	}
-
-	/**
-	 * @param dealershipId the dealershipId to set
-	 */
-	public void setDealershipId(String dealershipId) {
-		this.dealershipId = dealershipId;
 	}
 
 	/**
