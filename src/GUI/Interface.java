@@ -47,14 +47,14 @@ public class Interface {
                  * TODO: For selected dealership, when button is pressed, a vehicle can be added to that specified
                  *  dealership. WIP on how the vehicle will be added (either via json file upload or manual entry.
                  *  */
-            	
-            	// TODO: remove this, temporary testing
-            	// when you click "Add Vehicle", it should display all dealership id numbers in console.
-            	// you'll need to import a json file first.
-            	java.util.List<String> stuff = i.getAllDealershipIds();
-            	for (String s : stuff) {
-            		System.out.println(s);
-            	}
+
+                // TODO: remove this, temporary testing
+                // when you click "Add Vehicle", it should display all dealership id numbers in console.
+                // you'll need to import a json file first.
+                java.util.List<String> stuff = i.getAllDealershipIds();
+                for (String s : stuff) {
+                    System.out.println(s);
+                }
             }
         });
         listVehiclesButton.addActionListener(new ActionListener() {
@@ -84,7 +84,7 @@ public class Interface {
                 fc.showOpenDialog(panelMain);
                 File file = fc.getSelectedFile();
                 i.importFile(file);
-
+                updateDealershipComboBox(dealershipSelector);
                 /*
                  * TODO: Try and catch files that may not be the right type, empty, nonexistent file etc.
                  *  */
@@ -102,6 +102,18 @@ public class Interface {
 
             }
         });
+    }
+
+    /*
+     * Used to update the dealership combo box after an input file has been uploaded.
+     * Will remove all items and then update combo box with dealership id's
+     * */
+
+    private void updateDealershipComboBox(JComboBox comboBox) {
+        comboBox.removeAllItems();
+        for (String s : i.getAllDealershipIds()) {
+            comboBox.addItem(s);
+        }
     }
 
     public void createInterface() {
