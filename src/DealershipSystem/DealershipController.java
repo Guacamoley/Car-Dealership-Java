@@ -107,20 +107,20 @@ public class DealershipController {
 
 		// check for null argument
 		if (cars != null) {
-		
+
 			// for each car in list, addCar(car)
 			for (int i = 0; i < cars.size(); i++) {
-	
+
 				// add each car, and collect any invalid cars that are returned
 				Car invalidCar = addCar(cars.get(i));
-	
+
 				// if non-null object is returned, add to invalid cars list
 				if (invalidCar != null) {
 					invalidCars.add(invalidCar);
 				}
 			}
 		}
-		
+
 		return invalidCars;
 	}
 
@@ -134,14 +134,14 @@ public class DealershipController {
 		Dealership dealership = dealerships.get(dealershipId);
 		if (dealership != null) {
 			dealership.setAcquireEnabled(acquireEnabled);
-		}
-		else {
+		} else {
 			return;
 		}
 	}
 
 	/**
-	 * gets the list of all cars belonging to the given dealership id.
+	 * gets the list of all cars belonging to the given dealership id. returns an
+	 * empty list if the dealership cannot be found.
 	 * 
 	 * @param dealershipId the dealership id to match
 	 * @return the list of all cars for this dealership
@@ -150,18 +150,17 @@ public class DealershipController {
 		Dealership dealership = dealerships.get(dealershipId);
 		if (dealership != null) {
 			return dealership.getCars();
-		}
-		else {
-			return null;
+		} else {
+			return new ArrayList<Car>();
 		}
 	}
-	
+
 	/**
 	 * gets the list of all current dealership id's.
 	 * 
 	 * @return the list of all dealership id's
 	 */
-	public List<String> getDealershipIds(){
+	public List<String> getDealershipIds() {
 		return new ArrayList<String>(dealerships.keySet());
 	}
 }

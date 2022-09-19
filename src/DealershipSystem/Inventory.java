@@ -101,12 +101,21 @@ public class Inventory {
 	}
 
 	/**
-	 * gets list of all cars from the given dealership.
+	 * gets one string which includes all cars at the specified dealership. the
+	 * specified delimiter string is inserted between each entry. returns "" if
+	 * there are no entries.
 	 * 
-	 * @param dealershipId the dealership id that you want to get the cars from
-	 * @return list of all cars at this dealership
+	 * @param dealershipId the dealership id to retrieve from
+	 * @param delimiter    the string to insert between each entry
+	 * @return string including all cars from the dealership with delimiters
+	 *         inserted
 	 */
-	public List<Car> getCars(String dealershipId) {
-		return dc.getDealershipCars(dealershipId);
+	public String getCars(String dealershipId, String delimiter) {
+		String result = "";
+		List<Car> cars = dc.getDealershipCars(dealershipId);
+		for (Car c : cars) {
+			result += c.toString() + delimiter;
+		}
+		return result;
 	}
 }

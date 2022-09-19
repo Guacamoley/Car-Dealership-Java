@@ -14,27 +14,38 @@ public class Interface {
 	private JButton removeVehicleButton;
 	private JButton exportToJSONButton;
 	private JButton listVehiclesButton;
-	private JComboBox dealershipSelector;
+	private JComboBox<String> dealershipSelector;
 	private JButton addVehicleButton;
 	private JButton inputFileChooser;
 	private JRadioButton enableRadioButton;
 	private JRadioButton disableRadioButton;
 	private ButtonGroup acquisitionGroup;
 
-	public Inventory i = new Inventory();
+	// the inventory of cars and dealerships being worked on
+	private Inventory i = new Inventory();
+	
+	// holder for whichever dealership is currently selected
+	private String currentDealershipId = null;
 
 	public Interface() {
 
 		/**
-		 * TODO: JComboBox will display "Select Dealer" at the start. After uploading
-		 * json input file, it will update to list every dealership from json input
-		 * file. Specified dealer can be selected to perform functions on with other
-		 * various buttons available.
+		 * JComboBox will display "Select Dealer" at the start. After uploading json
+		 * input file, it will update to list every dealership from json input file.
+		 * Specified dealer can be selected to perform functions on with other various
+		 * buttons available.
 		 */
 		dealershipSelector.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// clear any results from the output window
+				outputArea.setText(null);
 
+				// set the current dealership id to whatever was selected in the drop-down
+				currentDealershipId = (String) dealershipSelector.getSelectedItem();
+
+				// TODO: remove this
+				System.out.println("dealership set to " + currentDealershipId);
 			}
 		});
 
@@ -71,14 +82,16 @@ public class Interface {
 		});
 
 		/**
-		 * TODO: For selected dealership, when button is pressed, it will list out all
+		 * For selected dealership, when button is pressed, it will list out all
 		 * vehicles the dealership has available. It shall list out vehicles onto the
 		 * JTextArea
 		 */
 		listVehiclesButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				// set output to display the cars of this dealership using the delimiter "\n"
+				// between each entry
+				outputArea.setText(i.getCars(currentDealershipId, "\n"));
 			}
 		});
 

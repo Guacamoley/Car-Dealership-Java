@@ -3,7 +3,7 @@ package DealershipSystem;
 import java.util.ArrayList;
 import java.util.List;
 
-/***
+/**
  * This class represents a car dealership which controls a list of car objects.
  * Each dealership has a unique id which cannot be changed after its creation.
  * Each dealership has a boolean which tracks whether or not the dealership is
