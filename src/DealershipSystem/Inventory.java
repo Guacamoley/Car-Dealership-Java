@@ -1,22 +1,20 @@
 package DealershipSystem;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class represents an inventory of cars distributed across multiple
  * dealerships. The public methods represent the fundamental functional
- * requirements. New car additions are handled using a DealershipSystem.DealershipController,
- * which controls a particular list of dealerships ensuring that cars are added
- * to the correct dealership.
+ * requirements. New car additions are handled using a
+ * DealershipSystem.DealershipController, which controls a particular list of
+ * dealerships ensuring that cars are added to the correct dealership.
  * 
  * @author Paul Schmitz
  *
  */
 public class Inventory {
 	Json c = new Json();
-
 
 	// FIELDS
 
@@ -34,21 +32,22 @@ public class Inventory {
 
 	// METHODS
 
-	public void importFile(File file) {
-		// TODO
-		// somehow retrieve the list of cars to be added
-		List<Car> importedList = c.readFile(file);
-
-		// add the list of cars and record a list of all cars that failed to add
-		List<Car> failList = dc.addCars(importedList);
-		// TODO: failList can be used here to display error messages or something on the
-		// interface
+	/**
+	 * Passes the file to the json reader to get the list of car objects. Then, the
+	 * objects are added to the inventory thru the dealership controller. This
+	 * places each car into its correct dealership. The list of cars that failed to
+	 * be added is returned.
+	 * 
+	 * @param file the json file to import
+	 * @return the list of cars that failed to be added, probably because they have
+	 *         no dealership id.
+	 */
+	public List<Car> importFile(File file) {
+		return dc.addCars(c.readFile(file));
 	}
 
 	/**
-	 * returns the list of all dealership id strings. TODO: could this be used for a
-	 * drop-down box or something where you select which dealership you want to
-	 * interact with?
+	 * returns the list of all dealership id strings.
 	 * 
 	 * @return list of all dealership id's
 	 */
@@ -57,24 +56,26 @@ public class Inventory {
 	}
 
 	/**
-	 * adds one new vehicle per assignment requirement #5. the car object in the
-	 * parameter must have its dealership Id field setup ahead of time. the system
-	 * automatically places the car at its dealership, and it checks whether or not
-	 * the dealership can acquire. TODO: depending on the desired usage, this method
-	 * could also be changed to accept each of the car parameters separately and
-	 * then create the car internally, such as addIncomingVehicle(String dealerId,
-	 * String carType, ...)
+	 * adds one new vehicle per assignment requirement #5. returns true if and only
+	 * if the car was successfully added. this requires the car's dealership Id to
+	 * be non-null. a null car parameter will return false.
 	 * 
-	 * @param car to be added
+	 * @param car the car to add
+	 * @return true if the car was successfully added to the inventory system.
+	 *         otherwise false.
 	 */
-	public void addIncomingVehicle(Car car) {
-		dc.addCar(car);
+	public boolean addIncomingVehicle(Car car) {
+		if (car == null)
+			return false;
+		else {
+			return dc.addCar(car) == null;
+		}
 	}
 
 	/**
 	 * toggles this dealership so that it can acquire future cars.
 	 * 
-	 * @param dealershipId
+	 * @param dealershipId the dealership id to enable
 	 */
 	public void enableDealerAcquisition(String dealershipId) {
 		dc.setDealershipAcquireEnabled(dealershipId, true);
@@ -83,23 +84,26 @@ public class Inventory {
 	/**
 	 * toggles this dealership so that it cannot acquire future cars.
 	 * 
-	 * @param dealershipId
+	 * @param dealershipId the dealership id to disable
 	 */
 	public void disableDealerAcquisition(String dealershipId) {
 		dc.setDealershipAcquireEnabled(dealershipId, false);
 	}
 
+	/**
+	 * TODO: export all cars for this dealership to a json file.
+	 * 
+	 * @param dealershipId
+	 */
 	public void exportFile(String dealershipId) {
-		// TODO, sample code:
+		// sample code:
 		// List<DealershipSystem.Car> myList = getDealershipCars(String dealershipId);
 	}
 
 	/**
-	 * gets list of all cars at the given dealership. TODO: depending on usage, this
-	 * function could convert the cars into strings and return a string list, if
-	 * that would be easier for the interface to handle.
+	 * gets list of all cars from the given dealership.
 	 * 
-	 * @param dealershipId
+	 * @param dealershipId the dealership id that you want to get the cars from
 	 * @return list of all cars at this dealership
 	 */
 	public List<Car> getCars(String dealershipId) {
