@@ -35,6 +35,8 @@ package DealershipSystem;
             this.acquisition_date = acquisition_date;
         }
 
+        // Getters and setters for car
+
         public String getDealership_id() {
             return dealership_id;
         }

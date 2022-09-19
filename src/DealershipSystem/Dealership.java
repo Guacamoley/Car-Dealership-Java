@@ -3,82 +3,91 @@ package DealershipSystem;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * This class represents a car dealership which controls a list of car objects.
+ * Each dealership has a unique id which cannot be changed after its creation.
+ * Each dealership has a boolean which tracks whether or not the dealership is
+ * allowed to acquire new cars. That business logic is implemented in the
+ * DealershipController class.
+ * 
+ * @author Paul Schmitz
+ *
+ */
 public class Dealership {
-    /*
-    * TODO:
-    * Attributes:
-    *   -dealershipID
-    *   (+)canAcquire - public or private?
-    *   -inventory
-    *
-    * Methods:
-    *   +addVehicle()
-    *   +enableAcquisition()
-    *   +disableAcquisition()
-    *   +listVehicles()
-    *   +toString()
-    *   +getters() & setters()
-    * */
-	
-	/*
-	 *  Note: it was necessary to add the following skeleton code in order 
-	 *  to start building the DealershipSystem.DealershipController class.
-	 */
-	
+
 	// FIELDS
-	
+
+	// the list of cars that belong to this dealership
 	private List<Car> cars;
-	private String dealershipId;
+
+	// the dealership's unique id
+	private final String dealershipId;
+
+	// whether or not the dealership is allowed to acquire cars
 	private boolean acquireEnabled;
-	
+
 	// CONSTRUCTORS
-	
+
+	/**
+	 * creates a new dealership with the provided id. starts a car list using
+	 * ArrayList, and enables car acquisition.
+	 * 
+	 * @param dealershipId the dealership id for the new dealership
+	 */
 	public Dealership(String dealershipId) {
 		cars = new ArrayList<Car>();
 		this.dealershipId = dealershipId;
 		acquireEnabled = true;
 	}
-	
+
 	// METHODS
-	
+
+	/**
+	 * add a car to the dealership. note that no restrictions are implemented at
+	 * this level, so the dealership id of the car need not match the dealership's
+	 * id, and canAcquire is not checked.
+	 * 
+	 * note: the business logic is implemented using the dealershipController class.
+	 * 
+	 * @param car the car to add
+	 */
 	public void addCar(Car car) {
 		cars.add(car);
 	}
-	
-	public List<Car> getCars(){
+
+	/**
+	 * @return the list of cars from this dealership
+	 */
+	public List<Car> getCars() {
 		return cars;
 	}
-	
+
+	/**
+	 * @param cars the list of cars to set
+	 */
 	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
 
 	/**
-	 * @return the dealershipId
+	 * @return the dealership id
 	 */
 	public String getDealershipId() {
 		return dealershipId;
 	}
 
 	/**
-	 * @param dealershipId the dealershipId to set
-	 */
-	public void setDealershipId(String dealershipId) {
-		this.dealershipId = dealershipId;
-	}
-
-	/**
-	 * @return the canAcquire
+	 * @return true iff the dealership can acquire cars
 	 */
 	public boolean isAcquireEnabled() {
 		return acquireEnabled;
 	}
 
 	/**
-	 * @param canAcquire the canAcquire to set
+	 * @param canAcquire sets whether or not the dealership can acquire cars
 	 */
 	public void setAcquireEnabled(boolean acquireEnabled) {
 		this.acquireEnabled = acquireEnabled;
 	}
-	
+
 }
