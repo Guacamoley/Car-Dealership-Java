@@ -73,6 +73,17 @@ public class Inventory {
 	}
 
 	/**
+	 * checks if the dealership exists and allows acquisitions.
+	 * 
+	 * @param dealershipId the dealership id to check
+	 * @return true iff the dealership exists in the system and it allows
+	 *         acquisitions.
+	 */
+	public boolean getDealerAcquisition(String dealershipId) {
+		return dc.getDealershipAcquireEnabled(dealershipId);
+	}
+
+	/**
 	 * toggles this dealership so that it can acquire future cars.
 	 * 
 	 * @param dealershipId the dealership id to enable

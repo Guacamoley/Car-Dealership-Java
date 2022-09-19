@@ -23,7 +23,7 @@ public class Interface {
 
 	// the inventory of cars and dealerships being worked on
 	private Inventory i = new Inventory();
-	
+
 	// holder for whichever dealership is currently selected
 	private String currentDealershipId = null;
 
@@ -44,8 +44,13 @@ public class Interface {
 				// set the current dealership id to whatever was selected in the drop-down
 				currentDealershipId = (String) dealershipSelector.getSelectedItem();
 
-				// TODO: remove this
-				System.out.println("dealership set to " + currentDealershipId);
+				// setup the radio buttons to reflect the current status
+				if (currentDealershipId != null) {
+					boolean canAcquire = i.getDealerAcquisition(currentDealershipId);
+					// this toggles the buttons without triggering any underlying logic
+					enableRadioButton.setSelected(canAcquire);
+					disableRadioButton.setSelected(!canAcquire);
+				}
 			}
 		});
 
@@ -130,22 +135,24 @@ public class Interface {
 		});
 
 		/**
-		 * 
+		 * When this button is clicked, it enables acquisition for the currently
+		 * selected dealership.
 		 */
 		enableRadioButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				i.enableDealerAcquisition(currentDealershipId);
 			}
 		});
 
 		/**
-		 * 
+		 * When this button is clicked, it disables acquisition for the currently
+		 * selected dealership.
 		 */
 		disableRadioButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				i.disableDealerAcquisition(currentDealershipId);
 			}
 		});
 	}
@@ -155,7 +162,7 @@ public class Interface {
 	 * uploaded. Will remove all items and then update combo box with dealership
 	 * id's
 	 */
-	private void updateDealershipComboBox(JComboBox comboBox) {
+	private void updateDealershipComboBox(JComboBox<String> comboBox) {
 		comboBox.removeAllItems();
 		for (String s : i.getAllDealershipIds()) {
 			comboBox.addItem(s);
@@ -163,7 +170,7 @@ public class Interface {
 	}
 
 	/**
-	 * 
+	 * sets up the initial interface container of buttons and objects
 	 */
 	public void createInterface() {
 		JFrame frame = new JFrame("GUI");

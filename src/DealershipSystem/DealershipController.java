@@ -138,6 +138,20 @@ public class DealershipController {
 			return;
 		}
 	}
+	
+	/**
+	 * returns true iff the dealership currently exists and allows acquisitions.
+	 * 
+	 * @param dealershipId the dealership id to check
+	 * @return true if the dealership exists and allows acquisition, otherwise false
+	 */
+	public boolean getDealershipAcquireEnabled(String dealershipId) {
+		Dealership dealership = dealerships.get(dealershipId);
+		if (dealership != null) {
+			return dealership.isAcquireEnabled();
+		}
+		else return false;
+	}
 
 	/**
 	 * gets the list of all cars belonging to the given dealership id. returns an
