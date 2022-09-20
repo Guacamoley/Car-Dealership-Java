@@ -1,7 +1,9 @@
 package DealershipSystem;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 
 /**
  * This class will grab user input when they are adding a vehicle. The dialogue will ask the user questions and save
@@ -24,6 +26,7 @@ public class AddVehicleInput {
     private Double price;
     private long acqDate;
     private Car car = new Car(dealerID, vehType, vehManu, vehModel, vehID, price, acqDate);
+    //DealershipController d = new DealershipController();
 
 //    Single method that the Add Button will call when the user wants to add a car
     public void addNewVehicle() {
@@ -34,6 +37,7 @@ public class AddVehicleInput {
         receiveVehID();
         receiveVehPrice();
         receieveVehDate();
+        //addCarToDealership(car);
     }
 
     /**
@@ -176,6 +180,16 @@ public class AddVehicleInput {
     private String createDialogueBox(String entry) {
         return JOptionPane.showInputDialog("Please type in the " + entry);
     }
+
+    // Method that will add the car to the correct dealership. If there is no dealership the method will make one.
+//    private void addCarToDealership(Car car) {
+//        List<Car> carList = new ArrayList<Car>();
+//        carList.add(car);
+//        d.addCar(car);
+//
+//
+//    }
+
 
 }
 
