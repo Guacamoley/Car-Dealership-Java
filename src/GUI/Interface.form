@@ -25,6 +25,8 @@
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
               <text value="Output of vehicles will be displayed here"/>
             </properties>
           </component>
