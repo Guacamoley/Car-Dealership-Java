@@ -11,115 +11,111 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Json {
-    /*
-     * TODO:
-     * readFile()
-     * exportFile()
-     * */
+	private JsonElement fileElement;
 
-    //File Reader
-    //File fileInput = new File("resources/input.json");
+	public List<Car> readFile(File fileInput) {
+		List<Car> cars = new ArrayList<>();
+		{
+			try {
+				fileElement = JsonParser.parseReader(new FileReader(fileInput));
+				JsonObject fileObject = fileElement.getAsJsonObject();
 
-    JsonElement fileElement;
+				// Process all cars
+				JsonArray jsonArrayOfCars = fileObject.get("car_inventory").getAsJsonArray();
 
-    public List<Car> readFile(File fileInput) {
-        List<Car> cars = new ArrayList<>();
-        {
-            try {
-                fileElement = JsonParser.parseReader(new FileReader(fileInput));
-                JsonObject fileObject = fileElement.getAsJsonObject();
+				for (JsonElement carElement : jsonArrayOfCars) {
+					// Get the DealershipSystem.Json Object:
+					JsonObject carJsonObject = carElement.getAsJsonObject();
 
-                //Process all cars
-                JsonArray jsonArrayOfCars = fileObject.get("car_inventory").getAsJsonArray();
+					// Extract data
+					String dealershipID = null;
+					String vehicleType = null;
+					String vehicleManu = null;
+					String vehicleModel = null;
+					String vehicleID = null;
+					Double price = null;
+					long acquisitionDate = carJsonObject.get("acquisition_date").getAsLong();
 
-                for (JsonElement carElement : jsonArrayOfCars) {
-                    //Get the DealershipSystem.Json Object:
-                    JsonObject carJsonObject = carElement.getAsJsonObject();
+					/*
+					 * -Input validation if the object attributes are empty inside the object to
+					 * prevent an exception from occurring -I would like to make this more efficient
+					 * by putting this through a loop for every object, and it's associated
+					 * attributes if it's null or not
+					 */
 
+					if (carJsonObject.has("dealership_id")) {
+						dealershipID = carJsonObject.get("dealership_id").getAsString();
+					}
+					if (carJsonObject.has("vehicle_type")) {
+						vehicleType = carJsonObject.get("vehicle_type").getAsString();
+					}
+					if (carJsonObject.has("vehicle_model")) {
+						vehicleModel = carJsonObject.get("vehicle_model").getAsString();
+					}
+					if (carJsonObject.has("vehicle_manufacturer")) {
+						vehicleManu = carJsonObject.get("vehicle_manufacturer").getAsString();
+					}
+					if (carJsonObject.has("vehicle_id")) {
+						vehicleID = carJsonObject.get("vehicle_id").getAsString();
+					}
 
-                    //Extract data
-                    String dealershipID = null;
-                    String vehicleType = null;
-                    String vehicleManu = null;
-                    String vehicleModel = null;
-                    String vehicleID = null;
-                    Double price = null;
-                    long acquisitionDate = carJsonObject.get("acquisition_date").getAsLong();
+					/*
+					 * -I'm not sure if you can leave primitives empty in the JSON file because it's
+					 * part of the syntax? Therefore it will just go straight to the exception
+					 * instead? -Needs further investigation -Exporting you can put in null but
+					 * importing you can't unless if you directly tinker the file and place the data
+					 * type as null
+					 */
+					if (carJsonObject.has("price")) {
+						price = carJsonObject.get("price").getAsDouble();
+					}
+					if (carJsonObject.has("acquisition_date")) {
+						acquisitionDate = carJsonObject.get("acquisition_date").getAsLong();
+					}
 
-                /*
-                -Input validation if the object attributes are empty inside the object to prevent an exception from occurring
-                -I would like to make this more efficient by putting this through a loop for every object, and it's associated attributes if it's null or not
-                 */
+					Car car = new Car(dealershipID, vehicleType, vehicleManu, vehicleModel, vehicleID, price,
+							acquisitionDate);
+					// Array list for storing cars and their attributes
+					cars.add(car);
 
-                    if (carJsonObject.has("dealership_id")) {
-                        dealershipID = carJsonObject.get("dealership_id").getAsString();
-                    }
-                    if (carJsonObject.has("vehicle_type")) {
-                        vehicleType = carJsonObject.get("vehicle_type").getAsString();
-                    }
-                    if (carJsonObject.has("vehicle_model")) {
-                        vehicleModel = carJsonObject.get("vehicle_model").getAsString();
-                    }
-                    if (carJsonObject.has("vehicle_manufacturer")) {
-                        vehicleManu = carJsonObject.get("vehicle_manufacturer").getAsString();
-                    }
-                    if (carJsonObject.has("vehicle_id")) {
-                        vehicleID = carJsonObject.get("vehicle_id").getAsString();
-                    }
+				}
+				// This is temporary and only for testing purposes
+				// System.out.println(cars);
+				System.out.println(fileInput);
 
-                /*
-                -I'm not sure if you can leave primitives empty in the JSON file because it's part of the syntax? Therefore it will just go straight to the exception instead?
-                -Needs further investigation
-                -Exporting you can put in null but importing you can't unless if you directly tinker the file and place the data type as null
-                 */
-                    if (carJsonObject.has("price")) {
-                        price = carJsonObject.get("price").getAsDouble();
-                    }
-                    if (carJsonObject.has("acquisition_date")) {
-                        acquisitionDate = carJsonObject.get("acquisition_date").getAsLong();
-                    }
+				// Error for input file if DNE
+			} catch (FileNotFoundException e) {
+				System.err.println("Error input file not found");
+				e.printStackTrace();
+			}
+			// Error if attribute data types are incorrect
+			catch (Exception e) {
+				System.err.println("Error processing the input file given in JSON");
+				e.printStackTrace();
+			}
 
-                    Car car = new Car(dealershipID, vehicleType, vehicleManu, vehicleModel, vehicleID, price, acquisitionDate);
-                    //Array list for storing cars and their attributes
-                    cars.add(car);
+		}
+		return cars;
+	}
 
-                }
-                //This is temporary and only for testing purposes
-                //System.out.println(cars);
-                System.out.println(fileInput);
+	/**
+	 * exports the given list of car objects to a json object in accordance with the
+	 * CarListDTO. the new file is placed in the resources folder.
+	 * 
+	 * @see https://stackoverflow.com/questions/43167016/how-to-keep-list-name-using-gson
+	 * @param cars
+	 */
+	public void exportFile(List<Car> cars) {
+		try (FileWriter fw = new FileWriter("resources\\exportedJsonFile.json")) {
 
-                //Error for input file if DNE
-            } catch (FileNotFoundException e) {
-                System.err.println("Error input file not found");
-                e.printStackTrace();
-            }
-            //Error if attribute data types are incorrect
-            catch (Exception e) {
-                System.err.println("Error processing the input file given in JSON");
-                e.printStackTrace();
-            }
-
-        }
-        return cars;
-    }
-
-    /**
-     * exports the given list of car objects to a json object in accordance with the CarListDTO. the new file is placed in the resources folder.
-     * 
-     * @see https://stackoverflow.com/questions/43167016/how-to-keep-list-name-using-gson
-     * @param cars
-     */
-    public void exportFile(List<Car> cars) {
-    	try (FileWriter fw = new FileWriter("resources\\exportedJsonFile.json")){
-			
 			// create the data transfer object so that the list will be properly named
 			CarListDTO output = new CarListDTO();
-			output.setText(cars);
-			
+			output.setCarInventory(cars);
+
 			// write the file
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			gson.toJson(output, fw);
-			
+
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
