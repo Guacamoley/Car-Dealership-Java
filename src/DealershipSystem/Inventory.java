@@ -1,6 +1,11 @@
 package DealershipSystem;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,6 +20,12 @@ import java.util.List;
  */
 public class Inventory {
 	Json c = new Json();
+
+	/*
+	This creates a gson object that contains ".setPrettyPrinting()". This makes the print more user friendly.
+
+	 */
+	Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	// FIELDS
 
@@ -108,7 +119,17 @@ public class Inventory {
 	 */
 	public void exportFile(String dealershipId) {
 		// sample code:
-		// List<DealershipSystem.Car> myList = getDealershipCars(String dealershipId);
+
+		List<DealershipSystem.Car> myList = dc.getDealershipCars(dealershipId);
+
+		//Writing the list of cars a specific dealership has
+		try {
+			FileWriter writer = new FileWriter("resources\\exportedJsonFile.json");
+			gson.toJson(myList, writer);
+			writer.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

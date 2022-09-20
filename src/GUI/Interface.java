@@ -131,7 +131,9 @@ public class Interface {
         exportToJSONButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                i.exportFile(currentDealershipId);
 
+                outputArea.setText("Successfully exported file to \"resources\" folder as \"exportedJsonFile.json\"");
             }
         });
 
