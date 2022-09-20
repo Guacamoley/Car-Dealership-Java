@@ -180,6 +180,7 @@ public class AddVehicleInput {
         return JOptionPane.showInputDialog("Please type in the " + entry);
     }
 
+
 }
 
 
