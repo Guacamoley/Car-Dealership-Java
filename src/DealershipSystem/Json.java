@@ -5,6 +5,8 @@ import com.google.gson.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,9 +103,26 @@ public class Json {
         return cars;
     }
 
-    public void exportFile() {
-
-    }
-
+    /**
+     * exports the given list of car objects to a json object in accordance with the CarListDTO. the new file is placed in the resources folder.
+     * 
+     * @see https://stackoverflow.com/questions/43167016/how-to-keep-list-name-using-gson
+     * @param cars
+     */
+    public void exportFile(List<Car> cars) {
+    	try (FileWriter fw = new FileWriter("resources\\exportedJsonFile.json")){
+			
+			// create the data transfer object so that the list will be properly named
+			CarListDTO output = new CarListDTO();
+			output.setText(cars);
+			
+			// write the file
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			gson.toJson(output, fw);
+			
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 }

@@ -1,11 +1,6 @@
 package DealershipSystem;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,13 +14,6 @@ import java.util.List;
  *
  */
 public class Inventory {
-	Json c = new Json();
-
-	/*
-	This creates a gson object that contains ".setPrettyPrinting()". This makes the print more user friendly.
-
-	 */
-	Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	// FIELDS
 
@@ -34,6 +22,11 @@ public class Inventory {
 	 * dealerships and the assignment of new cars to those dealerships.
 	 */
 	private DealershipController dc;
+
+	/*
+	 * the json handler responsible for file import/export functions.
+	 */
+	private Json c = new Json();
 
 	// CONSTRUCTORS
 
@@ -113,23 +106,16 @@ public class Inventory {
 	}
 
 	/**
-	 * TODO: export all cars for this dealership to a json file.
+	 * export all cars for this dealership to a json file in the resources folder.
 	 * 
 	 * @param dealershipId
 	 */
 	public void exportFile(String dealershipId) {
-		// sample code:
+		// get the list of cars to be exported
+		List<Car> myList = dc.getDealershipCars(dealershipId);
 
-		List<DealershipSystem.Car> myList = dc.getDealershipCars(dealershipId);
-
-		//Writing the list of cars a specific dealership has
-		try {
-			FileWriter writer = new FileWriter("resources\\exportedJsonFile.json");
-			gson.toJson(myList, writer);
-			writer.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		// pass the list to the json handler
+		c.exportFile(myList);
 	}
 
 	/**
