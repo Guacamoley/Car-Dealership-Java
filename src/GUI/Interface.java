@@ -1,6 +1,7 @@
 package GUI;
 
 import DealershipSystem.AddVehicleInput;
+import DealershipSystem.Car;
 import DealershipSystem.Inventory;
 
 import javax.swing.*;
@@ -75,7 +76,11 @@ public class Interface {
             @Override
             public void actionPerformed(ActionEvent e) {
 //				Adds a new vehicle
-                add.addNewVehicle();
+                Car newCar = null;
+                newCar = add.addNewVehicle();
+                i.addIncomingVehicle(newCar);
+                updateDealershipComboBox(dealershipSelector);
+
             }
         });
 
@@ -134,6 +139,7 @@ public class Interface {
         enableRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                i.enableDealerAcquisition(currentDealershipId);
 
             }
         });
@@ -144,6 +150,7 @@ public class Interface {
         disableRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                i.disableDealerAcquisition(currentDealershipId);
 
             }
         });
