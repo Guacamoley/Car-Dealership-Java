@@ -124,6 +124,13 @@ public class DealershipController {
 		return invalidCars;
 	}
 
+	public void removeCar(String dealershipID, String carID){
+		Dealership dealership = dealerships.get(dealershipID);
+		if (dealership != null){
+			
+		}
+	}
+
 	/**
 	 * sets whether or not a given dealership can acquire new cars.
 	 * 
@@ -137,6 +144,20 @@ public class DealershipController {
 		} else {
 			return;
 		}
+	}
+	
+	/**
+	 * returns true iff the dealership currently exists and allows acquisitions.
+	 * 
+	 * @param dealershipId the dealership id to check
+	 * @return true if the dealership exists and allows acquisition, otherwise false
+	 */
+	public boolean getDealershipAcquireEnabled(String dealershipId) {
+		Dealership dealership = dealerships.get(dealershipId);
+		if (dealership != null) {
+			return dealership.isAcquireEnabled();
+		}
+		else return false;
 	}
 
 	/**
