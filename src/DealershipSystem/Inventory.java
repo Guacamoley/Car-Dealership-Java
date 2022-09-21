@@ -112,12 +112,12 @@ public class Inventory {
 	 * 
 	 * @param dealershipId
 	 */
-	public void exportFile(String dealershipId) {
+	public void exportFile(String dealershipId, String fileName) {
 		// get the list of cars to be exported
 		List<Car> myList = dc.getDealershipCars(dealershipId);
 
 		// pass the list to the json handler
-		c.exportFile(myList);
+		c.exportFile(myList, fileName);
 	}
 
 	/**
