@@ -124,6 +124,13 @@ public class DealershipController {
 		return invalidCars;
 	}
 
+	public void removeCar(String dealershipID, String carID){
+		Dealership dealership = dealerships.get(dealershipID);
+		if (dealership != null){
+			
+		}
+	}
+
 	/**
 	 * sets whether or not a given dealership can acquire new cars.
 	 * 

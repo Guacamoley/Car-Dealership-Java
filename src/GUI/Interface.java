@@ -10,6 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+/**
+ * This class creates the interface of the car dealership project. It calls on the logic from
+ * AddVehicleInput, Car, and Inventory to complete user actions in the GUI.
+ * Actions include: importing & exporting JSON file, disable & enable acquisition, switching dealerships,
+ *                  adding vehicles, and listing vehicles.
+ * @author Michael Ha
+ * */
 public class Interface {
     private JPanel panelMain;
     private JPanel guiPanel;
@@ -39,7 +46,7 @@ public class Interface {
          * input file, it will update to list every dealership from json input file.
          * Specified dealer can be selected to perform functions on with other various
          * buttons available.
-         */
+         * */
         dealershipSelector.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,16 +63,8 @@ public class Interface {
                     enableRadioButton.setSelected(canAcquire);
                     disableRadioButton.setSelected(!canAcquire);
                 }
-
-                // TODO: remove this
-                System.out.println("dealership set to " + currentDealershipId);
             }
         });
-
-        /**
-         * TODO: Clicking this button will delete one vehicle from the inventory. It is
-         * not yet clear how the user will input the data.
-         */
         removeVehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,10 +73,11 @@ public class Interface {
         });
 
         /**
-         * TODO: For selected dealership, when button is pressed, a vehicle can be added
-         * to that specified dealership. WIP on how the vehicle will be added (either
-         * via json file upload or manual entry.
-         */
+         * Will prompt the user to enter information about the car being added into the system.
+         * Creates a newCar object as null. Calls on the addNewVehicle method in AddVehicleInput class for user input.
+         * After user input, will check if the add was successful. It'll finally update the dealership selector
+         * in case a new dealership was added, and provide user feedback on the add.
+         * */
         addVehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,7 +113,7 @@ public class Interface {
          * For selected dealership, when button is pressed, it will list out all
          * vehicles the dealership has available. It shall list out vehicles onto the
          * JTextArea
-         */
+         * */
         listVehiclesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,10 +124,10 @@ public class Interface {
         });
 
         /**
-         * TODO: When button is pressed, it will export all dealerships and all vehicles
+         * When button is pressed, it will export all dealerships and all vehicles
          * out into a new JSON file. User feedback will also be outputted into the
          * JTextArea.
-         */
+         * */
         exportToJSONButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -142,7 +142,7 @@ public class Interface {
          * from that file into the inventory. Cars will automatically be placed into
          * their respective dealerships. This also populates the dealership drop-down
          * selector.
-         */
+         * */
         inputFileChooser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -153,16 +153,13 @@ public class Interface {
                 i.importFile(file);
                 updateDealershipComboBox(dealershipSelector);
                 outputArea.setText("File " + file + " has been chosen");
-                /*
-                 * TODO: Try and catch files that may not be the right type, empty, nonexistent
-                 * file etc.
-                 */
             }
         });
 
         /**
-         *
-         */
+         * Dealerships will have acquisition enabled by default. Otherwise, if dealership is currently disabled,
+         * and user enables--the dealership can then add new vehicles into their inventory.
+         * */
         enableRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -171,9 +168,6 @@ public class Interface {
             }
         });
 
-        /**
-         *
-         */
         disableRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -184,11 +178,10 @@ public class Interface {
 
     }
 
-    /*
-     * Used to update the dealership combo box after an input file has been
-     * uploaded. Will remove all items and then update combo box with dealership
-     * id's
-     */
+    /**
+     * Removes all items from the dealership selector ComboBox, and then loops through Inventory for all
+     * dealershipIDs and populates the comboBox
+     * */
     private void updateDealershipComboBox(JComboBox<String> comboBox) {
         comboBox.removeAllItems();
         for (String s : i.getAllDealershipIds()) {
@@ -196,6 +189,9 @@ public class Interface {
         }
     }
 
+    /**
+     * Single method that creates the frame that the GUI will be placed in and sets it visible afterwards.
+     * */
     public void createInterface() {
         JFrame frame = new JFrame("GUI");
         frame.setContentPane(new Interface().panelMain);
