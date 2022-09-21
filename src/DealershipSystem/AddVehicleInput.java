@@ -1,33 +1,28 @@
 package DealershipSystem;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 
 /**
- * This class will grab user input when they are adding a vehicle. The dialogue will ask the user questions and save
- * those to the specified dealership. If there is no dealership, then it'll create a dealership.
+ * This class will prompt the user several times to enter information on the vehicle being added.
+ * It will then use that information to create a new Car object that will then be added into either an existing
+ * dealership, or create a new dealership based on the dealershipID that was entered by the user.
+ *
+ * @author Michael Ha
  */
-
-/**
- * TODO: create a method in this class that adds the car to the dealership (should be easy since we already have
- *  method for that.
- *  Pseudocode:
- *  -check if dealership exists
- *  if not, then create dealership
- *  finally add car to that dealership
- * */
 
 public class AddVehicleInput {
 
-//    Creates a new car object to be added
+    // Instance variables used to allocate and create a new Car object
     private String dealerID, vehType, vehManu, vehModel, vehID;
     private Double price;
     private long acqDate;
-    private Car car = new Car(dealerID, vehType, vehManu, vehModel, vehID, price, acqDate);
+    private final Car car = new Car(dealerID, vehType, vehManu, vehModel, vehID, price, acqDate);
 
-//    Single method that the Add Button will call when the user wants to add a car
+    /**
+     * Method that grabs multiple user entries from prompts and creates the Car object.
+     *
+     * @return The new car object that can later be added into an inventory*/
     public Car addNewVehicle() {
         receiveDealerID();
         receiveVehType();
@@ -43,8 +38,6 @@ public class AddVehicleInput {
      * Gets the dealership ID from user input. The loop will make sure the length of the input is 5 characters
      * and all characters are type int. If the input passes, then it'll change the dealership id. If not, then it should
      * return an error box and loop again for user input.
-     *
-     * TODO: Get user feedback box to appear if a bad entry was made
      * */
     private void receiveDealerID() {
         do {
@@ -54,7 +47,6 @@ public class AddVehicleInput {
                 if (userInput.length() == 5 && userInput.matches("[0-9]+"))
                     car.setDealership_id(userInput);
             } catch (InputMismatchException e) {
-                System.out.println("Please enter a 5 digit dealership id");
             }
         } while (car.getDealership_id() == null);
     }
@@ -63,8 +55,6 @@ public class AddVehicleInput {
      * Gets the vehicle type from user input. The loop will check if the entered type is one of the four types listed
      * (suv, sedan, pickup, sports car). If the input passes, then it'll change the vehicle type. If not, then it
      * should return an error box and loop again for user input.
-     *
-     * TODO: Get user feedback box to appear if a bad entry was made
      * */
     private void receiveVehType() {
         do {
@@ -84,8 +74,6 @@ public class AddVehicleInput {
      * Gets the vehicle type from user input. The loop will check if the entered type is one of the four types listed
      * (suv, sedan, pickup, sports car). If the input passes, then it'll change the vehicle type. If not, then it
      * should return an error box and loop again for user input.
-     *
-     * TODO: Get user feedback box to appear if a bad entry was made
      * */
     private void receiveVehManu() {
         do {
@@ -103,8 +91,6 @@ public class AddVehicleInput {
      * Gets the vehicle model from user input. The loop will check if the entered characters are all letters.
      * If the input passes, then it'll change the vehicle model. If not, then it
      * should return an error box and loop again for user input.
-     *
-     * TODO: Get user feedback box to appear if a bad entry was made
      * */
     private void receiveVehModel() {
         do {
@@ -122,8 +108,6 @@ public class AddVehicleInput {
      * Gets the vehicle ID from user input. The loop will check if the entered characters are all numbers.
      * If the input passes, then it'll change the vehicle ID. If not, then it
      * should return an error box and loop again for user input.
-     *
-     * TODO: Get user feedback box to appear if a bad entry was made
      * */
     private void receiveVehID() {
         do {
@@ -141,8 +125,6 @@ public class AddVehicleInput {
      * Gets the vehicle price from user input. The loop will check if the entered characters are all letters.
      * If the input passes, then it'll change the vehicle price. If not, then it
      * should return an error box and loop again for user input.
-     *
-     * TODO: Get user feedback box to appear if a bad entry was made
      * */
     private void receiveVehPrice() {
         do {
@@ -160,8 +142,6 @@ public class AddVehicleInput {
      * Gets the vehicle acquisition date from user input. The loop will check if the entered characters are all numbers.
      * If the input passes, then it'll change the vehicle acquisition date.
      * If not, then it should return an error box and loop again for user input.
-     *
-     * TODO: Get user feedback box to appear if a bad entry was made
      * */
     private void receieveVehDate() {
         do {
@@ -175,7 +155,12 @@ public class AddVehicleInput {
         } while (car.getAcquisition_date() < 1);
     }
 
-//    Method used to create an input dialogue box.
+    /**
+     * Method used to create a dialogue box for the user to input information into.
+     *
+     * @param entry The string value that whill be concatenated at the end of the inputDialog string
+     * @return showInputDialog box for user input
+     * */
     private String createDialogueBox(String entry) {
         return JOptionPane.showInputDialog("Please type in the " + entry);
     }
