@@ -80,11 +80,21 @@ public class Inventory {
 	 * checks if the dealership exists and allows acquisitions.
 	 * 
 	 * @param dealershipId the dealership id to check
-	 * @return true iff the dealership exists in the system and it allows
+	 * @return true if the dealership exists in the system and it allows
 	 *         acquisitions.
 	 */
 	public boolean getDealerAcquisition(String dealershipId) {
 		return dc.getDealershipAcquireEnabled(dealershipId);
+	}
+
+	/**
+	 * checks to see if the dealership being added via the add car button is a new dealership ID
+	 * @param dealershipId the dealership id to check
+	 * @return true if the dealership has been added already
+	 * **/
+	public boolean newCarDealerCheck(String dealershipId){
+		List list = dc.getDealershipIds();
+		return list.contains(dealershipId);
 	}
 
 	/**

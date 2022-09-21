@@ -74,7 +74,7 @@ public class Interface {
         });
 
         /**
-         * TODO: For selected dealership, when button is pressed, a vehicle can be added
+         *
          * to that specified dealership. WIP on how the vehicle will be added (either
          * via json file upload or manual entry.
          */
@@ -83,25 +83,30 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 // create a new input prompt window
                 add = new AddVehicleInput();
-
-                // Adds a new vehicle
-                Car newCar = null;
-                newCar = add.addNewVehicle();
-                boolean addSuccessful = i.addIncomingVehicle(newCar);
-
-                // update the dealership selector in case a new dealership was created
-                updateDealershipComboBox(dealershipSelector);
-
-                // display success or fail message
                 String responseMessage = "";
-                if (addSuccessful) {
-                    responseMessage = "Added successfully";
+
+                // Adds a new vehicle ID
+                Car newCar = null;
+                newCar = add.addVehID();
+
+                // Checks to see if the dealership can acquire cars.
+                // The newCarDealerCheck is to check and see if the car has a new dealership ID
+                // the getDealerAcquisition will check if the acquisition for a dealership is set to FALSE.
+                if (i.newCarDealerCheck(newCar.getDealership_id()) && !i.getDealerAcquisition(newCar.getDealership_id())) {
+
+                    responseMessage = "Not added successfully.\nDealership cannot acquire vehicles.\n";
+                    newCar = null;
+
                 } else {
-                    responseMessage = "Not added successfully";
+
+                    newCar = add.addNewVehicle();
+                    i.addIncomingVehicle(newCar);
+                    responseMessage = "Added successfully";
+
+                    // update the dealership selector in case a new dealership was created
+                    updateDealershipComboBox(dealershipSelector);
                 }
-                if (newCar != null) {
-                    responseMessage += ":\n" + newCar.toString();
-                }
+
                 outputArea.setText(responseMessage);
 
                 // cleanup resource
@@ -124,7 +129,7 @@ public class Interface {
         });
 
         /**
-         * TODO: When button is pressed, it will export all dealerships and all vehicles
+         *
          * out into a new JSON file. User feedback will also be outputted into the
          * JTextArea.
          */

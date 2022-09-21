@@ -29,13 +29,18 @@ public class AddVehicleInput {
 
 //    Single method that the Add Button will call when the user wants to add a car
     public Car addNewVehicle() {
-        receiveDealerID();
+
         receiveVehType();
         receiveVehManu();
         receiveVehModel();
         receiveVehID();
         receiveVehPrice();
         receieveVehDate();
+        return car;
+    }
+
+    public Car addVehID() {
+        receiveDealerID();
         return car;
     }
 
