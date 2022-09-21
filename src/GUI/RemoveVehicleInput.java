@@ -1,5 +1,9 @@
-package DealershipSystem;
+package GUI;
 import javax.swing.*;
+
+import DealershipSystem.Car;
+import DealershipSystem.DealershipController;
+
 import java.util.InputMismatchException;
 
 public class RemoveVehicleInput {

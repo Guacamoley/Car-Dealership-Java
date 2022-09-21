@@ -1,9 +1,7 @@
 package GUI;
 
-import DealershipSystem.AddVehicleInput;
 import DealershipSystem.Car;
 import DealershipSystem.Inventory;
-import DealershipSystem.RemoveVehicleInput;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
