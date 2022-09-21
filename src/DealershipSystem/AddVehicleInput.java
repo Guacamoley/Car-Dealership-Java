@@ -24,13 +24,18 @@ public class AddVehicleInput {
      *
      * @return The new car object that can later be added into an inventory*/
     public Car addNewVehicle() {
-        receiveDealerID();
+
         receiveVehType();
         receiveVehManu();
         receiveVehModel();
         receiveVehID();
         receiveVehPrice();
         receieveVehDate();
+        return car;
+    }
+
+    public Car addVehID() {
+        receiveDealerID();
         return car;
     }
 

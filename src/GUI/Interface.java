@@ -5,6 +5,8 @@ import DealershipSystem.Car;
 import DealershipSystem.Inventory;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +16,10 @@ import java.io.File;
  * This class creates the interface of the car dealership project. It calls on the logic from
  * AddVehicleInput, Car, and Inventory to complete user actions in the GUI.
  * Actions include: importing & exporting JSON file, disable & enable acquisition, switching dealerships,
- *                  adding vehicles, and listing vehicles.
+ * adding vehicles, and listing vehicles.
+ *
  * @author Michael Ha
- * */
+ */
 public class Interface {
     private JPanel panelMain;
     private JPanel guiPanel;
@@ -83,25 +86,27 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 // create a new input prompt window
                 add = new AddVehicleInput();
+                String responseMessage = "";
+                boolean addSuccessful;
 
                 // Adds a new vehicle
                 Car newCar = null;
-                newCar = add.addNewVehicle();
-                boolean addSuccessful = i.addIncomingVehicle(newCar);
+                newCar = add.addVehID();
 
+                if (i.newCarDealerCheck(newCar.getDealership_id()) && !(i.getDealerAcquisition(newCar.getDealership_id()))) {
+                    responseMessage = "Not added successfully.\nDealership cannot acquire vehicles.";
+                    newCar = null;
+
+                } else {
+                    responseMessage = "Vehicle added successfully";
+                    responseMessage += ":\n" + newCar.toString();
+                    add.addNewVehicle();
+                    i.addIncomingVehicle(newCar);
+
+
+                }
                 // update the dealership selector in case a new dealership was created
                 updateDealershipComboBox(dealershipSelector);
-
-                // display success or fail message
-                String responseMessage = "";
-                if (addSuccessful) {
-                    responseMessage = "Added successfully";
-                } else {
-                    responseMessage = "Not added successfully";
-                }
-                if (newCar != null) {
-                    responseMessage += ":\n" + newCar.toString();
-                }
                 outputArea.setText(responseMessage);
 
                 // cleanup resource
@@ -124,16 +129,30 @@ public class Interface {
         });
 
         /**
-         * When button is pressed, it will export all dealerships and all vehicles
-         * out into a new JSON file. User feedback will also be outputted into the
-         * JTextArea.
+         * When button is pressed, it will export all vehicles for selected dealership into new .json file
+         * A save screen will show up prompting user to select the location and give the file its name.
+         * It will then save the file to that specified location and provide user feedback in the
+         * outputTextArea. If user cancelled the export, there will also be feedback for that as well in the
+         * text area.
          * */
         exportToJSONButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                i.exportFile(currentDealershipId);
+                JFileChooser fc = new JFileChooser();
+                fc.setCurrentDirectory(new File("."));
+                fc.setAcceptAllFileFilterUsed(false);
+                FileNameExtensionFilter fileFilter = new FileNameExtensionFilter(".json", "json");
+                fc.addChoosableFileFilter(fileFilter);
+                int choice = fc.showSaveDialog(panelMain);
 
-                outputArea.setText("Successfully exported file to \"resources\" folder as \"exportedJsonFile.json\"");
+                if (choice == JFileChooser.APPROVE_OPTION) {
+                    String fileName = fc.getSelectedFile().getAbsolutePath();
+                    if (!fileName.endsWith(".json"))
+                        fileName += ".json";
+                    i.exportFile(currentDealershipId, fileName);
+                    outputArea.setText("Successfully exported to " + fileName);
+                } else
+                    outputArea.setText("The export was cancelled by the user");
             }
         });
 
@@ -147,6 +166,9 @@ public class Interface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
+                fc.setAcceptAllFileFilterUsed(false);
+                FileNameExtensionFilter fileFilter = new FileNameExtensionFilter(".json", "json");
+                fc.addChoosableFileFilter(fileFilter);
                 fc.setCurrentDirectory(new File("."));
                 fc.showOpenDialog(panelMain);
                 File file = fc.getSelectedFile();
@@ -181,7 +203,7 @@ public class Interface {
     /**
      * Removes all items from the dealership selector ComboBox, and then loops through Inventory for all
      * dealershipIDs and populates the comboBox
-     * */
+     */
     private void updateDealershipComboBox(JComboBox<String> comboBox) {
         comboBox.removeAllItems();
         for (String s : i.getAllDealershipIds()) {
@@ -191,7 +213,7 @@ public class Interface {
 
     /**
      * Single method that creates the frame that the GUI will be placed in and sets it visible afterwards.
-     * */
+     */
     public void createInterface() {
         JFrame frame = new JFrame("GUI");
         frame.setContentPane(new Interface().panelMain);
