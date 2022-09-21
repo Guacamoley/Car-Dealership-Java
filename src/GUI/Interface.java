@@ -86,25 +86,27 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 // create a new input prompt window
                 add = new AddVehicleInput();
+                String responseMessage = "";
+                boolean addSuccessful;
 
                 // Adds a new vehicle
                 Car newCar = null;
-                newCar = add.addNewVehicle();
-                boolean addSuccessful = i.addIncomingVehicle(newCar);
+                newCar = add.addVehID();
 
+                if (i.newCarDealerCheck(newCar.getDealership_id()) && !(i.getDealerAcquisition(newCar.getDealership_id()))) {
+                    responseMessage = "Not added successfully.\nDealership cannot acquire vehicles.";
+                    newCar = null;
+
+                } else {
+                    responseMessage = "Vehicle added successfully";
+                    responseMessage += ":\n" + newCar.toString();
+                    add.addNewVehicle();
+                    i.addIncomingVehicle(newCar);
+
+
+                }
                 // update the dealership selector in case a new dealership was created
                 updateDealershipComboBox(dealershipSelector);
-
-                // display success or fail message
-                String responseMessage = "";
-                if (addSuccessful) {
-                    responseMessage = "Added successfully";
-                } else {
-                    responseMessage = "Not added successfully";
-                }
-                if (newCar != null) {
-                    responseMessage += ":\n" + newCar.toString();
-                }
                 outputArea.setText(responseMessage);
 
                 // cleanup resource
