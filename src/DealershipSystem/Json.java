@@ -105,8 +105,8 @@ public class Json {
 	 * @see https://stackoverflow.com/questions/43167016/how-to-keep-list-name-using-gson
 	 * @param cars
 	 */
-	public void exportFile(List<Car> cars) {
-		try (FileWriter fw = new FileWriter("resources\\exportedJsonFile.json")) {
+	public void exportFile(List<Car> cars, String filePath) {
+		try (FileWriter fw = new FileWriter(filePath)) {
 
 			// create the data transfer object so that the list will be properly named
 			CarListDTO output = new CarListDTO();
