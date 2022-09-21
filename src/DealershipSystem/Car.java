@@ -34,6 +34,8 @@ package DealershipSystem;
             this.price = price;
             this.acquisition_date = acquisition_date;
         }
+        public Car (String dealership_id, String vehicle_id) {this.dealership_id = dealership_id; this.vehicle_id = vehicle_id;}
+
 
         /** getDealership_id will return the dealership_id from the car object, so it can be assigned to its corresponding dealership. **/
 
