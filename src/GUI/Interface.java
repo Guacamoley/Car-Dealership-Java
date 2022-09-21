@@ -1,6 +1,5 @@
 package GUI;
 
-import DealershipSystem.AddVehicleInput;
 import DealershipSystem.Car;
 import DealershipSystem.Inventory;
 
@@ -42,6 +41,8 @@ public class Interface {
     // Create new adder object for adding new vehicles
     private AddVehicleInput add;
 
+    private RemoveVehicleInput remove;
+
     public Interface() {
 
         /**
@@ -71,6 +72,19 @@ public class Interface {
         removeVehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                remove = new RemoveVehicleInput();
+                String responseMessage = "";
+                boolean removeSuccessful;
+
+                Car newCar = null;
+                newCar = remove.addNewVehicle();
+
+                i.removeIncomingVehicle(newCar);
+
+
+
+
+
 
             }
         });

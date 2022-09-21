@@ -124,9 +124,22 @@ public class DealershipController {
 		return invalidCars;
 	}
 
+	public void setDealershipCars(List <Car> c, String dealerID) {
+		Dealership dealership = dealerships.get(dealerID);
+		dealership.setCars(c);
+	}
+
 	public void removeCar(String dealershipID, String carID){
 		Dealership dealership = dealerships.get(dealershipID);
 		if (dealership != null){
+			for (Car a: dealership.getCars()) {
+				if (a.getVehicle_id().equalsIgnoreCase(carID)) {
+					dealership.getCars().remove(a);
+				}
+
+			}
+
+
 			
 		}
 	}

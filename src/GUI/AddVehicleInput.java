@@ -1,6 +1,9 @@
-package DealershipSystem;
+package GUI;
 
 import javax.swing.*;
+
+import DealershipSystem.Car;
+
 import java.util.InputMismatchException;
 
 /**

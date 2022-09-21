@@ -41,10 +41,10 @@ public class Inventory {
 	 * objects are added to the inventory thru the dealership controller. This
 	 * places each car into its correct dealership. The list of cars that failed to
 	 * be added is returned.
-	 * 
+	 *
 	 * @param file the json file to import
 	 * @return the list of cars that failed to be added, probably because they have
-	 *         no dealership id.
+	 * no dealership id.
 	 */
 	public List<Car> importFile(File file) {
 		return dc.addCars(c.readFile(file));
@@ -52,7 +52,7 @@ public class Inventory {
 
 	/**
 	 * returns the list of all dealership id strings.
-	 * 
+	 *
 	 * @return list of all dealership id's
 	 */
 	public List<String> getAllDealershipIds() {
@@ -63,10 +63,10 @@ public class Inventory {
 	 * adds one new vehicle per assignment requirement #5. returns true if and only
 	 * if the car was successfully added. this requires the car's dealership Id to
 	 * be non-null. a null car parameter will return false.
-	 * 
+	 *
 	 * @param car the car to add
 	 * @return true if the car was successfully added to the inventory system.
-	 *         otherwise false.
+	 * otherwise false.
 	 */
 	public boolean addIncomingVehicle(Car car) {
 		if (car == null)
@@ -76,6 +76,22 @@ public class Inventory {
 		}
 	}
 
+	public boolean removeIncomingVehicle(Car car) {
+		if ((car.getDealership_id() == null) || (car.getVehicle_id() == null)) {
+			return false;
+		}
+		else {
+			for (Car a : dc.getDealershipCars(car.getDealership_id())) {
+				if (a.getVehicle_id().equalsIgnoreCase(car.getVehicle_id())) {
+					List <Car> c = dc.getDealershipCars(car.getDealership_id());
+					c.remove(a);
+					dc.setDealershipCars(c, car.getDealership_id());
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 
 	/**
