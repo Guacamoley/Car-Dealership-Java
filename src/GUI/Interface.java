@@ -80,12 +80,6 @@ public class Interface {
                 newCar = remove.addNewVehicle();
 
                 i.removeIncomingVehicle(newCar);
-
-
-
-
-
-
             }
         });
 
@@ -112,11 +106,10 @@ public class Interface {
                     newCar = null;
 
                 } else {
-                    responseMessage = "Vehicle added successfully";
-                    responseMessage += ":\n" + newCar.toString();
                     add.addNewVehicle();
                     i.addIncomingVehicle(newCar);
-
+                    responseMessage = "Vehicle added successfully";
+                    responseMessage += ":\n" + newCar;
 
                 }
                 // update the dealership selector in case a new dealership was created
