@@ -52,7 +52,7 @@ public class AddVehicleInput {
             try {
                 String userInput = createDialogueBox("5 digit Dealership ID");
 
-                if (userInput.length() == 5 && userInput.matches("[0-9]+"))
+                if (userInput.matches("[0-9]+"))
                     car.setDealership_id(userInput);
             } catch (InputMismatchException e) {
             }
