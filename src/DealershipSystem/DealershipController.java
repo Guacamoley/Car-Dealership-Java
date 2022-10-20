@@ -187,4 +187,19 @@ public class DealershipController {
 	public List<String> getDealershipIds() {
 		return new ArrayList<String>(dealerships.keySet());
 	}
+
+	/**
+	 * gets all cars from all dealerships
+	 * 
+	 * @return the list of all cars
+	 */
+	public List<Car> getAllCars() {
+		List<Car> allCars = new ArrayList<Car>();
+		
+		// for each dealership, get its cars and add it to the list
+		for(Dealership d : dealerships.values()) {
+			allCars.addAll(d.getCars());
+		}
+		return allCars;
+	}
 }

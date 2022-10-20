@@ -161,6 +161,23 @@ public class Inventory {
 	}
 
 	/**
+	 * This method saves the current session (all cars) as a json file at the
+	 * specified path. it returns a status enumeration indicating success or
+	 * failure.
+	 * 
+	 * @param savePath the path of the desired file
+	 * @return Status indicating whether or not the session was saved successfully
+	 *         or not
+	 */
+	public Status exportSession(String savePath) {
+		// retrieve all cars and send them to the json exporter.
+		c.exportFile(dc.getAllCars(), savePath);
+
+		// return status
+		return Status.SUCCESS;
+	}
+
+	/**
 	 * gets one string which includes all cars at the specified dealership. the
 	 * specified delimiter string is inserted between each entry. returns "" if
 	 * there are no entries.
