@@ -5,7 +5,6 @@ import DealershipSystem.Inventory;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,12 +68,12 @@ public class Interface {
                 }
             }
         });
+        
+        
         removeVehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 remove = new RemoveVehicleInput();
-                String responseMessage = "";
-                boolean removeSuccessful;
 
                 Car newCar = null;
                 newCar = remove.addNewVehicle();
@@ -95,13 +94,12 @@ public class Interface {
                 // create a new input prompt window
                 add = new AddVehicleInput();
                 String responseMessage = "";
-                boolean addSuccessful;
 
                 // Adds a new vehicle
                 Car newCar = null;
                 newCar = add.addVehID();
 
-                if (i.newCarDealerCheck(newCar.getDealership_id()) && !(i.getDealerAcquisition(newCar.getDealership_id()))) {
+                if (i.isExistingDealer(newCar.getDealership_id()) && !(i.getDealerAcquisition(newCar.getDealership_id()))) {
                     responseMessage = "Not added successfully.\nDealership cannot acquire vehicles.";
                     newCar = null;
 
@@ -255,8 +253,8 @@ public class Interface {
         listVehiclesButton = new JButton();
         listVehiclesButton.setText("List Vehicles");
         guiPanel.add(listVehiclesButton, new com.intellij.uiDesigner.core.GridConstraints(2, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        dealershipSelector = new JComboBox();
-        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
+        dealershipSelector = new JComboBox<String>();
+        final DefaultComboBoxModel<String> defaultComboBoxModel1 = new DefaultComboBoxModel<String>();
         defaultComboBoxModel1.addElement("Select a dealership");
         dealershipSelector.setModel(defaultComboBoxModel1);
         guiPanel.add(dealershipSelector, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

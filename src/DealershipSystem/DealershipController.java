@@ -43,28 +43,26 @@ public class DealershipController {
 	 * adds one car to a dealership by matching the car's dealership id to the
 	 * dealership's id. will create a new dealership if needed. doesn't add anything
 	 * if the dealership is setup to not allow acquisitions. newly created
-	 * dealerships are set to allow acquisitions by default. returns the car object
-	 * if unable to add it, otherwise returns null. if the input parameter is null,
-	 * it does nothing and returns null. the idea is that it will return any
-	 * instantiated objects that failed to add.
+	 * dealerships are set to allow acquisitions by default. returns a status
+	 * enumeration failure if the car could not be added to the dealership.
+	 * otherwise it returns a status enumeration success.
 	 * 
 	 * @param car the car to add
-	 * @return null if the car is successfully added, otherwise return the invalid
-	 *         car. if the car being added is null, it will not be added, but null
-	 *         is still returned.
+	 * @return status enumeration failure if the car was not added. otherwise,
+	 *         status enumeration success.
 	 */
-	public Car addCar(Car car) {
+	public Status addCar(Car car) {
 		// get car's dealership ID
 		String dealershipId = null;
 		if (car == null) {
-			return null;
+			return Status.FAILURE;
 		} else {
 			dealershipId = car.getDealership_id();
 		}
 
-		// if car has no dealership ID, return the car object
+		// if car has no dealership ID, return failure status
 		if (dealershipId == null) {
-			return car;
+			return Status.FAILURE;
 		}
 
 		// search existing dealerships for ID
@@ -78,32 +76,29 @@ public class DealershipController {
 
 		// check if dealership is able to acquire cars
 		if (!dealership.isAcquireEnabled()) {
-			return car;
+			return Status.FAILURE;
 		}
 
 		// add car to dealership
 		dealership.addCar(car);
 
-		// returns null because the car was successfully added
-		return null;
+		// returns success because the car was successfully added
+		return Status.SUCCESS;
 	}
 
 	/**
 	 * adds a list of cars to their respective dealerships using each car's
-	 * dealership id. will create new dealerships if needed. returns a list of cars
-	 * that were not successfully added, likely because they are have no dealership
-	 * id. null entries on the input list are essentially ignored and will not show
-	 * up on the returned list.
+	 * dealership id. will create new dealerships if needed. returns a list of
+	 * enumerations indicating whether or not each car was successfully added.
 	 * 
 	 * @param cars a list of cars to add
-	 * @return a list of all invalids cars which could not be added. if none
-	 *         invalid, then the list is empty. if the input list contains null
-	 *         entries, then those will not be added, and they will also not appear
-	 *         on the invalid list.
+	 * @return a list of status enumerations representing whether or not each car
+	 *         was successfully added. the order of the list corresponds to the
+	 *         ordering of the input cars list.
 	 */
-	public List<Car> addCars(List<Car> cars) {
-		// the list of invalid cars to be returned
-		List<Car> invalidCars = new ArrayList<Car>();
+	public List<Status> addCars(List<Car> cars) {
+		// the list of statuses
+		List<Status> statusList = new ArrayList<Status>();
 
 		// check for null argument
 		if (cars != null) {
@@ -111,36 +106,31 @@ public class DealershipController {
 			// for each car in list, addCar(car)
 			for (int i = 0; i < cars.size(); i++) {
 
-				// add each car, and collect any invalid cars that are returned
-				Car invalidCar = addCar(cars.get(i));
+				// add each car, and collect the status of each attempt
+				Status currentStatus = addCar(cars.get(i));
 
-				// if non-null object is returned, add to invalid cars list
-				if (invalidCar != null) {
-					invalidCars.add(invalidCar);
-				}
+				// add each status to the list
+				statusList.add(currentStatus);
 			}
 		}
-
-		return invalidCars;
+		return statusList;
 	}
 
-	public void setDealershipCars(List <Car> c, String dealerID) {
+	public void setDealershipCars(List<Car> c, String dealerID) {
 		Dealership dealership = dealerships.get(dealerID);
 		dealership.setCars(c);
 	}
 
-	public void removeCar(String dealershipID, String carID){
+	public void removeCar(String dealershipID, String carID) {
 		Dealership dealership = dealerships.get(dealershipID);
-		if (dealership != null){
-			for (Car a: dealership.getCars()) {
+		if (dealership != null) {
+			for (Car a : dealership.getCars()) {
 				if (a.getVehicle_id().equalsIgnoreCase(carID)) {
 					dealership.getCars().remove(a);
 				}
 
 			}
 
-
-			
 		}
 	}
 
@@ -158,7 +148,7 @@ public class DealershipController {
 			return;
 		}
 	}
-	
+
 	/**
 	 * returns true iff the dealership currently exists and allows acquisitions.
 	 * 
@@ -169,8 +159,8 @@ public class DealershipController {
 		Dealership dealership = dealerships.get(dealershipId);
 		if (dealership != null) {
 			return dealership.isAcquireEnabled();
-		}
-		else return false;
+		} else
+			return false;
 	}
 
 	/**
