@@ -45,13 +45,9 @@ public class Interface {
 	private RemoveVehicleInput remove;
 
 	// the location for the session save file
-	final String savePath = "resources\\session.json";
+	final static String SAVE_PATH = "resources\\session.json";
 
 	public Interface() {
-		// TODO testing save feature
-		loadSession();
-		System.out.println("test message after loading a session");
-
 		/**
 		 * JComboBox will display "Select Dealer" at the start. After uploading json
 		 * input file, it will update to list every dealership from json input file.
@@ -247,9 +243,14 @@ public class Interface {
 	 */
 	public void createInterface() {
 		JFrame frame = new JFrame("GUI");
-		frame.setContentPane(new Interface().panelMain);
+		Interface myInterface = new Interface();
+		frame.setContentPane(myInterface.panelMain);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
+
+		// attempt to load previous saved session
+		myInterface.loadSession();
+
 		frame.setVisible(true);
 	}
 
@@ -260,7 +261,7 @@ public class Interface {
 	 */
 	private void saveSession() {
 		// attempt to save and store the status
-		Status saveStatus = i.exportSession(savePath);
+		Status saveStatus = i.exportSession(SAVE_PATH);
 
 		// display GUI message depending on status
 		switch (saveStatus) {
@@ -283,7 +284,7 @@ public class Interface {
 	 */
 	private void loadSession() {
 		// locate the file and check if it exists
-		File saveFile = new File(savePath);
+		File saveFile = new File(SAVE_PATH);
 		if (saveFile.isFile()) {
 
 			// load file into current system
