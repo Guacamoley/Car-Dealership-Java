@@ -39,14 +39,14 @@ public class Inventory {
 	/**
 	 * Passes the file to the json reader to get the list of car objects. Then, the
 	 * objects are added to the inventory thru the dealership controller. This
-	 * places each car into its correct dealership. The list of cars that failed to
-	 * be added is returned.
+	 * places each car into its correct dealership. The list of status enumerations
+	 * indicating which cars were successfully added is returned.
 	 *
 	 * @param file the json file to import
-	 * @return the list of cars that failed to be added, probably because they have
-	 * no dealership id.
+	 * @return the list of status enumerations indicating whether or not each car
+	 *         was successfully added.
 	 */
-	public List<Car> importFile(File file) {
+	public List<Status> importFile(File file) {
 		return dc.addCars(c.readFile(file));
 	}
 
@@ -60,39 +60,51 @@ public class Inventory {
 	}
 
 	/**
-	 * adds one new vehicle per assignment requirement #5. returns true if and only
-	 * if the car was successfully added. this requires the car's dealership Id to
-	 * be non-null. a null car parameter will return false.
+	 * adds one new vehicle per assignment requirement #5. returns a status
+	 * enumeration indicating whether or not it was successfully added. this
+	 * requires the car's dealership Id to be non-null. a null car parameter will
+	 * return a failure.
 	 *
 	 * @param car the car to add
 	 * @return true if the car was successfully added to the inventory system.
-	 * otherwise false.
+	 *         otherwise false.
 	 */
-	public boolean addIncomingVehicle(Car car) {
-		if (car == null)
-			return false;
-		else {
-			return dc.addCar(car) == null;
-		}
+	public Status addIncomingVehicle(Car car) {
+		return dc.addCar(car);
 	}
 
-	public boolean removeIncomingVehicle(Car car) {
-		if ((car.getDealership_id() == null) || (car.getVehicle_id() == null)) {
-			return false;
-		}
-		else {
-			for (Car a : dc.getDealershipCars(car.getDealership_id())) {
-				if (a.getVehicle_id().equalsIgnoreCase(car.getVehicle_id())) {
-					List <Car> c = dc.getDealershipCars(car.getDealership_id());
-					c.remove(a);
-					dc.setDealershipCars(c, car.getDealership_id());
-					return true;
+	/**
+	 * removes one car from its dealer. the car is found by searching its dealerId
+	 * among the dealers and by matching the cars' vehicleIds. both Id matches are
+	 * case-sensitive. returns status enumeration indicating if it was successful.
+	 * 
+	 * @param target the car to remove
+	 * @return status enumeration success if the car was found and removed.
+	 *         otherwise returns status failure.
+	 */
+	public Status removeIncomingVehicle(Car target) {
+		// check if the car has the necessary fields to search and match
+		if ((target.getDealership_id() == null) || (target.getVehicle_id() == null)) {
+			return Status.FAILURE;
+		} else {
+			// based on the car's dealerId, get that dealer's list of cars
+			String dealershipToSearch = target.getDealership_id();
+			for (Car currentCar : dc.getDealershipCars(dealershipToSearch)) {
+
+				// search the list of cars for the matching car using vehicle id
+				if (currentCar.getVehicle_id().equals(target.getVehicle_id())) {
+
+					// replace the dealer's car list with a new list of cars which has the target
+					// car removed
+					List<Car> updatedList = dc.getDealershipCars(dealershipToSearch);
+					updatedList.remove(currentCar);
+					dc.setDealershipCars(updatedList, dealershipToSearch);
+					return Status.SUCCESS;
 				}
 			}
 		}
-		return false;
+		return Status.FAILURE;
 	}
-
 
 	/**
 	 * checks if the dealership exists and allows acquisitions.
@@ -106,13 +118,15 @@ public class Inventory {
 	}
 
 	/**
-	 * checks to see if the dealership being added via the add car button is a new dealership ID
+	 * checks to see if the dealership being added via the add car button is a new
+	 * dealership ID
+	 * 
 	 * @param dealershipId the dealership id to check
 	 * @return true if the dealership has been added already
-	 * **/
-	public boolean newCarDealerCheck(String dealershipId){
-		List list = dc.getDealershipIds();
-		return list.contains(dealershipId);
+	 **/
+	public boolean isExistingDealer(String dealershipId) {
+		List<String> currentDealers = dc.getDealershipIds();
+		return currentDealers.contains(dealershipId);
 	}
 
 	/**
@@ -144,6 +158,23 @@ public class Inventory {
 
 		// pass the list to the json handler
 		c.exportFile(myList, fileName);
+	}
+
+	/**
+	 * This method saves the current session (all cars) as a json file at the
+	 * specified path. it returns a status enumeration indicating success or
+	 * failure.
+	 * 
+	 * @param savePath the path of the desired file
+	 * @return Status indicating whether or not the session was saved successfully
+	 *         or not
+	 */
+	public Status exportSession(String savePath) {
+		// retrieve all cars and send them to the json exporter.
+		c.exportFile(dc.getAllCars(), savePath);
+
+		// return status
+		return Status.SUCCESS;
 	}
 
 	/**
