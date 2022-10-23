@@ -15,7 +15,7 @@ public class GetVehicleInput {
      * @return The dealer ID.
      */
     protected String receiveDealerID() {
-        return createDialogueBox("Enter Dealership ID: ");
+        return createDialogueBox("Dealership ID: ");
     }
 
     /**
@@ -27,7 +27,7 @@ public class GetVehicleInput {
     protected String receiveVehType() {
         String userInput = createDialogueBox("Vehicle Type: suv, sedan, pickup, sports car");
         while (!userInput.equalsIgnoreCase("suv") && !userInput.equalsIgnoreCase("sedan") && !userInput.equalsIgnoreCase("pickup") && !userInput.equalsIgnoreCase("sports car")) {
-            userInput = createDialogueBox("Please select one Vehicle Type: suv, sedan, pickup, sports car");
+            userInput = createDialogueBox("Vehicle Type: suv, sedan, pickup, sports car");
         }
         return userInput;
     }
@@ -40,7 +40,7 @@ public class GetVehicleInput {
     protected String receiveVehManu() {
         String userInput = createDialogueBox("Vehicle manufacturer");
         while (!userInput.matches("[a-zA-Z]+"))
-            userInput = createDialogueBox("Please enter a valid Vehicle manufacturer");
+            userInput = createDialogueBox("valid Vehicle manufacturer");
         return userInput;
     }
 
@@ -51,7 +51,7 @@ public class GetVehicleInput {
      */
     protected String receiveVehModel() {
         String userInput = createDialogueBox("Vehicle Model");
-        while (!userInput.matches("[a-zA-Z]+")) userInput = createDialogueBox("Please enter a valid Vehicle Model");
+        while (!userInput.matches("[a-zA-Z]+")) userInput = createDialogueBox("valid Vehicle Model");
         return userInput;
     }
 
@@ -62,7 +62,7 @@ public class GetVehicleInput {
      */
     protected String receiveVehID() {
         String userInput = createDialogueBox("Vehicle ID");
-        while (!userInput.matches("[0-9a-zA-Z]+")) userInput = createDialogueBox("Please enter a valid Vehicle ID");
+        while (!userInput.matches("[0-9a-zA-Z]+")) userInput = createDialogueBox("valid Vehicle ID");
         return userInput;
     }
 
@@ -73,7 +73,7 @@ public class GetVehicleInput {
      */
     protected Double receiveVehPrice() {
         String userInput = createDialogueBox("Vehicle Price");
-        while (!userInput.matches("[0-9]+")) userInput = createDialogueBox("Please enter a valid Vehicle Price");
+        while (!userInput.matches("[0-9]+")) userInput = createDialogueBox("valid Vehicle Price");
         return Double.valueOf(userInput);
     }
 
@@ -84,7 +84,7 @@ public class GetVehicleInput {
      */
     protected long receieveVehDate() {
         String userInput = createDialogueBox("Acquisition Date");
-        while (!userInput.matches("[0-9]+")) userInput = createDialogueBox("Please enter a valid Acquisition Date");
+        while (!userInput.matches("[0-9]+")) userInput = createDialogueBox("valid Acquisition Date");
         return Long.parseLong(userInput);
     }
 
