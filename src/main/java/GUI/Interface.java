@@ -13,7 +13,7 @@ import java.io.File;
 
 /**
  * This class creates the interface of the car dealership project. It calls on
- * the logic from AddVehicleInput, Car, and Inventory to complete user actions
+ * the logic from GetVehicleInput, Car, and Inventory to complete user actions
  * in the GUI. Actions include: importing & exporting JSON file, disable &
  * enable acquisition, switching dealerships, adding vehicles, and listing
  * vehicles.
@@ -21,6 +21,8 @@ import java.io.File;
  * @author Michael Ha
  */
 public class Interface {
+    // the location for the session save file
+    final static String SAVE_PATH = "resources\\session.json";
     private JPanel panelMain;
     private JPanel guiPanel;
     private JTextArea outputArea;
@@ -32,20 +34,12 @@ public class Interface {
     private JButton inputFileChooser;
     private JRadioButton enableRadioButton;
     private JRadioButton disableRadioButton;
-
+    private JButton transferButton;
     // the inventory of cars and dealerships being worked on
     private Inventory i = new Inventory();
-
     // holder for whichever dealership is currently selected
     private String currentDealershipId = null;
-
-    // Create new adder object for adding new vehicles
-    private AddVehicleInput add;
-
     private RemoveVehicleInput remove;
-
-    // the location for the session save file
-    final static String SAVE_PATH = "resources\\session.json";
 
     public Interface() {
         /**
@@ -78,30 +72,26 @@ public class Interface {
         });
 
         /**
-         * Will prompt the user to enter information about the car being added into the
-         * system. Creates a newCar object as null. Calls on the addNewVehicle method in
-         * AddVehicleInput class for user input. After user input, will check if the add
-         * was successful. It'll finally update the dealership selector in case a new
-         * dealership was added, and provide user feedback on the add.
+         * Will prompt the user to enter information about the car being added into the system.
+         * Gets the dealerID first to see if it exists and is acquiring. If true, then creates a new car
+         * with createCar.
          */
         addVehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // create a new input prompt window
-                add = new AddVehicleInput();
-                String responseMessage = "";
-
+                CreateCar createCar = new CreateCar();
+                String responseMessage;
+                GetVehicleInput getInput = new GetVehicleInput();
+                String dealershipID = getInput.receiveDealerID();
                 // Adds a new vehicle
-                Car newCar = null;
-                newCar = add.addVehID();
 
-                if (i.isExistingDealer(newCar.getDealership_id())
-                        && !(i.getDealerAcquisition(newCar.getDealership_id()))) {
+                if (i.isExistingDealer(dealershipID)
+                        && !(i.getDealerAcquisition(dealershipID))) {
                     responseMessage = "Not added successfully.\nDealership cannot acquire vehicles.";
-                    newCar = null;
-
                 } else {
-                    add.addNewVehicle();
+                    Car newCar = createCar.addNewVehicle();
+                    newCar.setDealership_id(dealershipID);
                     i.addIncomingVehicle(newCar);
                     responseMessage = "Vehicle added successfully";
                     responseMessage += ":\n" + newCar;
@@ -112,7 +102,7 @@ public class Interface {
                 outputArea.setText(responseMessage);
 
                 // cleanup resource
-                add = null;
+                getInput = null;
             }
         });
 
@@ -205,6 +195,11 @@ public class Interface {
             }
         });
 
+        transferButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
     }
 
     /**
@@ -353,6 +348,9 @@ public class Interface {
         outputArea.setEnabled(true);
         outputArea.setText("Output of vehicles will be displayed here");
         scrollPane1.setViewportView(outputArea);
+        transferButton = new JButton();
+        transferButton.setText("Transfer");
+        guiPanel.add(transferButton, new com.intellij.uiDesigner.core.GridConstraints(1, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ButtonGroup buttonGroup;
         buttonGroup = new ButtonGroup();
         buttonGroup.add(enableRadioButton);
