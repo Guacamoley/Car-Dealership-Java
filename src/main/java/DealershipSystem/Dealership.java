@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * This class represents a car dealership which controls a list of car objects.
  * Each dealership has a unique id which cannot be changed after its creation.
- * Each dealership has a boolean which tracks whether or not the dealership is
+ * Each dealership has a boolean which tracks whether the dealership is
  * allowed to acquire new cars. That business logic is implemented in the
  * DealershipController class.
  * 
@@ -23,7 +23,7 @@ public class Dealership {
 	// the dealership's unique id
 	private final String dealershipId;
 
-	// whether or not the dealership is allowed to acquire cars
+	// whether the dealership is allowed to acquire cars
 	private boolean acquireEnabled;
 
 	// CONSTRUCTORS
@@ -77,14 +77,14 @@ public class Dealership {
 	}
 
 	/**
-	 * @return true iff the dealership can acquire cars
+	 * @return true if the dealership can acquire cars
 	 */
 	public boolean isAcquireEnabled() {
 		return acquireEnabled;
 	}
 
 	/**
-	 * @param canAcquire sets whether or not the dealership can acquire cars
+	 * @param canAcquire sets whether the dealership can acquire cars
 	 */
 	public void setAcquireEnabled(boolean acquireEnabled) {
 		this.acquireEnabled = acquireEnabled;
