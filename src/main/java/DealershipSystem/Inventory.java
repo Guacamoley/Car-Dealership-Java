@@ -38,12 +38,12 @@ public class Inventory {
 
 	/**
 	 * Passes the file to the json reader to get the list of car objects. Then, the
-	 * objects are added to the inventory thru the dealership controller. This
+	 * objects are added to the inventory through the dealership controller. This
 	 * places each car into its correct dealership. The list of status enumerations
 	 * indicating which cars were successfully added is returned.
 	 *
 	 * @param file the json file to import
-	 * @return the list of status enumerations indicating whether or not each car
+	 * @return the list of status enumerations indicating whether each car
 	 *         was successfully added.
 	 */
 	public List<Status> importFile(File file) {
@@ -61,8 +61,8 @@ public class Inventory {
 
 	/**
 	 * adds one new vehicle per assignment requirement #5. returns a status
-	 * enumeration indicating whether or not it was successfully added. this
-	 * requires the car's dealership Id to be non-null. a null car parameter will
+	 * enumeration indicating whether it was successfully added. this
+	 * requires the car's dealership ID to be non-null. a null car parameter will
 	 * return a failure.
 	 *
 	 * @param car the car to add
@@ -75,7 +75,7 @@ public class Inventory {
 
 	/**
 	 * removes one car from its dealer. the car is found by searching its dealerId
-	 * among the dealers and by matching the cars' vehicleIds. both Id matches are
+	 * among the dealers and by matching the cars' vehicleIds. both ID matches are
 	 * case-sensitive. returns status enumeration indicating if it was successful.
 	 * 
 	 * @param target the car to remove
@@ -110,7 +110,7 @@ public class Inventory {
 	 * checks if the dealership exists and allows acquisitions.
 	 * 
 	 * @param dealershipId the dealership id to check
-	 * @return true if the dealership exists in the system and it allows
+	 * @return true if the dealership exists in the system, and it allows
 	 *         acquisitions.
 	 */
 	public boolean getDealerAcquisition(String dealershipId) {
@@ -166,7 +166,7 @@ public class Inventory {
 	 * failure.
 	 * 
 	 * @param savePath the path of the desired file
-	 * @return Status indicating whether or not the session was saved successfully
+	 * @return Status indicating whether the session was saved successfully
 	 *         or not
 	 */
 	public Status exportSession(String savePath) {
