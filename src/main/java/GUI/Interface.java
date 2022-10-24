@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
 
 /**
  * This class creates the interface of the car dealership project. It calls on
@@ -23,6 +24,7 @@ import java.io.File;
 public class Interface {
     // the location for the session save file
     final static String SAVE_PATH = "resources\\session.json";
+    private final GetVehicleInput getInput = new GetVehicleInput();
     private JPanel panelMain;
     private JPanel guiPanel;
     private JTextArea outputArea;
@@ -82,7 +84,6 @@ public class Interface {
                 // create a new input prompt window
                 CreateCar createCar = new CreateCar();
                 String responseMessage;
-                GetVehicleInput getInput = new GetVehicleInput();
                 String dealershipID = getInput.receiveDealerID();
                 // Adds a new vehicle
 
@@ -100,9 +101,6 @@ public class Interface {
                 // update the dealership selector in case a new dealership was created
                 updateDealershipComboBox(dealershipSelector);
                 outputArea.setText(responseMessage);
-
-                // cleanup resource
-                getInput = null;
             }
         });
 
@@ -198,6 +196,7 @@ public class Interface {
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
