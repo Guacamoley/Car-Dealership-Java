@@ -8,6 +8,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 //DEALERS ELEMENT
@@ -26,7 +27,8 @@ public class xmlDealers {
     }
 
     //Method for deserialzing/unmarshalling the xml file
-    public void xmlUnmarshal(){
+    public List<Car> xmlUnmarshal(){
+        List<Car> cars = new ArrayList<>();
         try {
             File file = new File("resources/dealer.xml");
 
@@ -36,29 +38,65 @@ public class xmlDealers {
 
             xmlDealers dealers = (xmlDealers) unmarshaller.unmarshal(file);
 
+            //data
+
+
 
 
             for(Dealer deal : dealers.getxmlDealer()) { //Loops through all dealers
-                System.out.println(deal.getDealerName());
-                System.out.println(deal.getDealerId());
-                System.out.println("+++++++++++++++++++++++++++++++="); //indicates next Dealer
-                for (Vehicles vehi : deal.getVehicles()) { //Loops through all vehicles
-                    System.out.println(vehi.getVehicleType());
-                    System.out.println(vehi.getVehicleID());
-                    System.out.println(vehi.getVehicleMake());
-                    System.out.println(vehi.getVehicleModel());
+                //data for car class
+                // Extract data
+                String dealershipID = null;
+                String vehicleType = null;
+                String vehicleManu = null; //Synonymous with brand or make
+                String vehicleModel = null;
+                String vehicleID = null;
+                Double price = null;
+                long acquisitionDate = System.currentTimeMillis()/1000;
+
+                //New Data
+                String dealerName = null;
+                String currency = null;
+
+
+                dealerName = deal.getDealerName();
+                dealershipID = deal.getDealerId();
+
+                for (Vehicles vehi : deal.getVehicles()) { //Loops through all vehicles;
+                    vehicleType = vehi.getVehicleType();
+
+                    vehicleID = vehi.getVehicleID();
+
+                    vehicleManu = vehi.getVehicleMake();
+                    vehicleModel = vehi.getVehicleModel();
+
                     for (Price pri : vehi.getPrices()) { //Loops through all prices
-                        System.out.println(pri.getCurrency());
-                        System.out.println(pri.getValue());
-                        System.out.println("======================================="); //indicates next vehicle
+
+                        currency = pri.getCurrency();
+
+                        price = pri.getValue();
+
+
                     }
+                    Car car = new Car(dealershipID, vehicleType, vehicleManu, vehicleModel, vehicleID, price, acquisitionDate,
+                            dealerName, currency);
+                    // Array list for storing cars and their attributes
+                    cars.add(car);
+
+
                 }
+                //Debugging
+               // System.out.println(cars);
+
+
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return cars;
     }
+
 
 }
 
@@ -164,7 +202,7 @@ class Price{
     String currency = null;
 
     @XmlValue
-    int value;
+    double value;
 
     public String getCurrency() {
         return currency;
@@ -174,7 +212,7 @@ class Price{
         this.currency = currency;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 

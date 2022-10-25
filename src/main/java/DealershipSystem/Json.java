@@ -35,6 +35,9 @@ public class Json {
 					String vehicleID = null;
 					Double price = null;
 					long acquisitionDate = carJsonObject.get("acquisition_date").getAsLong();
+					//New Data
+					String dealerName = null;
+					String currency = null;
 
 					/*
 					 * -Input validation if the object attributes are empty inside the object to
@@ -101,7 +104,7 @@ public class Json {
 	/**
 	 * exports the given list of car objects to a json object in accordance with the
 	 * CarListDTO. the new file is placed in the resources folder.
-	 * 
+	 *
 	 * @see https://stackoverflow.com/questions/43167016/how-to-keep-list-name-using-gson
 	 * @param cars
 	 */
