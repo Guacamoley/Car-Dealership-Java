@@ -37,6 +37,9 @@ public class Interface {
     private JRadioButton enableRadioButton;
     private JRadioButton disableRadioButton;
     private JButton transferButton;
+    private JButton importXMLButton;
+    private JButton saveButton;
+    private JButton editDealerNameButton;
     // the inventory of cars and dealerships being worked on
     private Inventory i = new Inventory();
     // holder for whichever dealership is currently selected
@@ -217,6 +220,24 @@ public class Interface {
                         outputArea.setText("Successfully transferred vehicle " + carToTransfer + " to " + dealerToTransfer);
                     }
                 }
+            }
+        });
+        editDealerNameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        importXMLButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
