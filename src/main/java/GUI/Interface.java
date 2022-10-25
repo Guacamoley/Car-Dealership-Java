@@ -280,6 +280,7 @@ public class Interface {
         }
     }
 
+    // Edits the dealership name for each vehicle to user specified name.
     private void editDealerName() {
         String dealerName = getInput.receiveDealerName();
         for (Car car : i.getDealerCars(currentDealershipId)) {
