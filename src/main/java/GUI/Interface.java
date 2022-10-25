@@ -3,6 +3,7 @@ package GUI;
 import DealershipSystem.Car;
 import DealershipSystem.Inventory;
 import DealershipSystem.Status;
+import DealershipSystem.TransferInventory;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -10,7 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.List;
 
 /**
  * This class creates the interface of the car dealership project. It calls on
@@ -87,8 +87,7 @@ public class Interface {
                 String dealershipID = getInput.receiveDealerID();
                 // Adds a new vehicle
 
-                if (i.isExistingDealer(dealershipID)
-                        && !(i.getDealerAcquisition(dealershipID))) {
+                if (i.isExistingDealer(dealershipID) && !(i.getDealerAcquisition(dealershipID))) {
                     responseMessage = "Not added successfully.\nDealership cannot acquire vehicles.";
                 } else {
                     Car newCar = createCar.addNewVehicle();
@@ -114,7 +113,7 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 // set output to display the cars of this dealership using the delimiter "\n"
                 // between each entry
-                outputArea.setText(i.getCars(currentDealershipId, "\n"));
+                outputArea.setText(i.printCars(currentDealershipId, "\n"));
             }
         });
 
@@ -141,12 +140,10 @@ public class Interface {
 
                 if (choice == JFileChooser.APPROVE_OPTION) {
                     String fileName = fc.getSelectedFile().getAbsolutePath();
-                    if (!fileName.endsWith(".json"))
-                        fileName += ".json";
+                    if (!fileName.endsWith(".json")) fileName += ".json";
                     i.exportFile(currentDealershipId, fileName);
                     outputArea.setText("Successfully exported to " + fileName);
-                } else
-                    outputArea.setText("The export was cancelled by the user");
+                } else outputArea.setText("The export was cancelled by the user");
             }
         });
 
@@ -193,10 +190,33 @@ public class Interface {
             }
         });
 
+        /*
+          Transfers a car from the current selected dealership to another dealership based on user input.
+          Checks if that dealership exists and is accepting acquisitions or if dealership is the same as current dealer.
+          Else it'll move to get the transferring car's ID and checks if it's valid. If it is valid, then the transfer
+          will occur.
+          */
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                TransferInventory transferInventory = new TransferInventory();
+                outputArea.setText("Select a dealership to transfer to: \n");
+                printComboBoxItems(dealershipSelector);
+                String dealerToTransfer = getInput.receiveDealerID();
 
+                if (!i.getDealerAcquisition(dealerToTransfer) || dealerToTransfer.equalsIgnoreCase(currentDealershipId)) {
+                    outputArea.setText("Dealership you are transferring to either doesn't exist \nor you're trying to transfer" + " into the current dealership.");
+                } else {
+                    outputArea.setText("Cars available for transfer:\n" + i.printCars(currentDealershipId, "\n"));
+                    String carToTransfer = getInput.receiveVehID();
+
+                    if (!i.getDealerCars(currentDealershipId).toString().contains(carToTransfer))
+                        outputArea.setText("Car with ID " + carToTransfer + " does not exist!");
+                    else {
+                        transferInventory.transferCar(currentDealershipId, dealerToTransfer, carToTransfer, i);
+                        outputArea.setText("Successfully transferred vehicle " + carToTransfer + " to " + dealerToTransfer);
+                    }
+                }
             }
         });
     }
@@ -212,6 +232,14 @@ public class Interface {
             comboBox.addItem(s);
         }
         selectDealership();
+    }
+
+    /*
+     * Prints out all items from a comboBox to output area*/
+    private void printComboBoxItems(JComboBox<String> comboBox) {
+        for (int i = 0; i < comboBox.getItemCount(); i++) {
+            outputArea.append(comboBox.getItemAt(i) + "\n");
+        }
     }
 
     /**
