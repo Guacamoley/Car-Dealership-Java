@@ -10,6 +10,44 @@ import javax.swing.*;
 
 public class GetVehicleInput {
     /**
+     * Gets the dealership name from user input.
+     *
+     * @return the dealer name.
+     */
+    protected String receiveDealerName() { return createDialogueBox("Dealership Name");  }
+
+    /**
+     * Gets the currency used for the purchase of the vehicle.
+     *
+     * @return the currency type
+     */
+    protected String receiveCurrency() {
+        String userInput = createDialogueBox("Currency Type: ");
+        while (!userInput.matches("[a-zA-Z]")){
+            userInput = createDialogueBox("Currency Type: ");
+        }
+        return userInput;
+
+    }
+    /**
+     * Gets the status of any loans on the car being added.
+     *
+     * @return true or false isLoaned boolean.
+     */
+    protected boolean receiveLoanStatus(){
+        String userInput = createDialogueBox("Loan status: true, false");
+        while(!userInput.equalsIgnoreCase("true") && !userInput.equalsIgnoreCase("false")){
+            userInput = createDialogueBox("Loan status: true, false");
+        }
+        if (userInput.equalsIgnoreCase("true")){
+            return true;
+        }
+        else { return false; }
+    }
+
+
+    /**
+     *
      * Gets the dealership ID from user input.
      *
      * @return The dealer ID.
