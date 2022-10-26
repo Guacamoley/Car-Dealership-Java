@@ -231,7 +231,7 @@ public class Interface {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                saveSession();
             }
         });
         importXMLButton.addActionListener(new ActionListener() {
