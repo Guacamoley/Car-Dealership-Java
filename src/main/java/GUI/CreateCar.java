@@ -22,6 +22,8 @@ public class CreateCar {
         car.setVehicle_id(getInput.receiveVehID());
         car.setPrice(getInput.receiveVehPrice());
         car.setAcquisition_date(getInput.receieveVehDate());
+        car.setDealerName(getInput.receiveDealerName());
+        car.setCurrency(getInput.receiveCurrency());
         return car;
     }
 }
