@@ -76,8 +76,7 @@ public class Json {
 						acquisitionDate = carJsonObject.get("acquisition_date").getAsLong();
 					}
 
-					Car car = new Car(dealershipID, vehicleType, vehicleManu, vehicleModel, vehicleID, price,
-							acquisitionDate);
+					Car car = new Car(dealershipID, vehicleType, vehicleManu, vehicleModel, vehicleID, price, acquisitionDate, dealerName, currency);
 					// Array list for storing cars and their attributes
 					cars.add(car);
 
