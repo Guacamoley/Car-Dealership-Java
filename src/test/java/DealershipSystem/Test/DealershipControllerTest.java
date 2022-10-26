@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class tests all methods of the dealership controller class.
@@ -32,7 +32,7 @@ class DealershipControllerTest {
     final Car testCar4 = new Car(null, "vehicleId4");
 
     // list of all cars
-    final List<Car> cars = new ArrayList(Arrays.asList(testCar, testCar2, testCar3, testCar4));
+    final List<Car> cars = new ArrayList<>(Arrays.asList(testCar, testCar2, testCar3, testCar4));
 
     // create the test objects before each test
     @BeforeEach
@@ -51,13 +51,13 @@ class DealershipControllerTest {
     void addCar() {
         // positive test, car will be added
         Status testResponse = testDc.addCar(testCar);
-        assertEquals(testResponse, Status.SUCCESS);
-        assertEquals(testDc.getAllCars().contains(testCar), true);
+        assertEquals(Status.SUCCESS, testResponse);
+        assertTrue(testDc.getAllCars().contains(testCar));
 
         // negative test, car will not be added
         Status testResponse2 = testDc.addCar(testCar4);
-        assertEquals(testResponse2, Status.FAILURE);
-        assertEquals(testDc.getAllCars().contains(testCar4), false);
+        assertEquals(Status.FAILURE, testResponse2);
+        assertFalse(testDc.getAllCars().contains(testCar4));
     }
 
     // adds the list of cars to the dealership controller
@@ -67,19 +67,19 @@ class DealershipControllerTest {
 
         // checks the dealer ids
         List<String> dealerIds = new ArrayList<>(Arrays.asList("dealerId", "dealerId2"));
-        assertEquals(testDc.getDealershipIds().containsAll(dealerIds), true);
+        assertTrue(testDc.getDealershipIds().containsAll(dealerIds));
 
         // checks each car object
         List<Car> validCars = new ArrayList<>(Arrays.asList(testCar, testCar2, testCar3));
-        assertEquals(testDc.getAllCars().containsAll(validCars), true);
+        assertTrue(testDc.getAllCars().containsAll(validCars));
 
         // not all cars were added since one was invalid
-        assertEquals(testDc.getAllCars().containsAll(cars), false);
+        assertFalse(testDc.getAllCars().containsAll(cars));
 
         // check the result list, note the last car should fail to add
-        assertEquals(resultList, new ArrayList<>(Arrays.asList(
+        assertEquals(new ArrayList<>(Arrays.asList(
                 Status.SUCCESS, Status.SUCCESS, Status.SUCCESS, Status.FAILURE
-        )));
+        )), resultList);
     }
 
     @Test
@@ -93,7 +93,7 @@ class DealershipControllerTest {
 
         // assign car list to that dealer
         testDc.setDealershipCars(myCars, myDealerId);
-        assertEquals(testDc.getDealershipCars(myDealerId), myCars);
+        assertEquals(myCars, testDc.getDealershipCars(myDealerId));
     }
 
     @Test
@@ -105,24 +105,24 @@ class DealershipControllerTest {
         testDc.addCars(cars);
 
         // remove testCar
-        assertEquals(testDc.getAllCars().contains(testCar), true);
+        assertTrue(testDc.getAllCars().contains(testCar));
         testDc.removeCar(testCar.getDealership_id(), testCar.getVehicle_id());
-        assertEquals(testDc.getAllCars().contains(testCar), false);
+        assertFalse(testDc.getAllCars().contains(testCar));
 
         // remove testCar2
-        assertEquals(testDc.getAllCars().contains(testCar2), true);
+        assertTrue(testDc.getAllCars().contains(testCar2));
         testDc.removeCar(testCar2.getDealership_id(), testCar2.getVehicle_id());
-        assertEquals(testDc.getAllCars().contains(testCar2), false);
+        assertFalse(testDc.getAllCars().contains(testCar2));
 
         // remove testCar3
-        assertEquals(testDc.getAllCars().contains(testCar3), true);
+        assertTrue(testDc.getAllCars().contains(testCar3));
         testDc.removeCar(testCar3.getDealership_id(), testCar3.getVehicle_id());
-        assertEquals(testDc.getAllCars().contains(testCar3), false);
+        assertFalse(testDc.getAllCars().contains(testCar3));
 
         // try to remove testCar4, note that it wasn't added
-        assertEquals(testDc.getAllCars().contains(testCar4), false);
+        assertFalse(testDc.getAllCars().contains(testCar4));
         testDc.removeCar(testCar4.getDealership_id(), testCar4.getVehicle_id());
-        assertEquals(testDc.getAllCars().contains(testCar4), false);
+        assertFalse(testDc.getAllCars().contains(testCar4));
     }
 
     @Test
@@ -131,26 +131,26 @@ class DealershipControllerTest {
         testDc.addCars(cars);
 
         // check default status
-        assertEquals(testDc.getDealershipAcquireEnabled(testCar.getDealership_id()), true);
-        assertEquals(testDc.getDealershipAcquireEnabled(testCar3.getDealership_id()), true);
+        assertTrue(testDc.getDealershipAcquireEnabled(testCar.getDealership_id()));
+        assertTrue(testDc.getDealershipAcquireEnabled(testCar3.getDealership_id()));
 
         // set to false, verify
         testDc.setDealershipAcquireEnabled(testCar.getDealership_id(), false);
-        assertEquals(testDc.getDealershipAcquireEnabled(testCar.getDealership_id()), false);
+        assertFalse(testDc.getDealershipAcquireEnabled(testCar.getDealership_id()));
 
         // check that other dealers are not affected
-        assertEquals(testDc.getDealershipAcquireEnabled(testCar3.getDealership_id()), true);
+        assertTrue(testDc.getDealershipAcquireEnabled(testCar3.getDealership_id()));
 
         // set other dealer to false, verify
         testDc.setDealershipAcquireEnabled(testCar3.getDealership_id(), false);
-        assertEquals(testDc.getDealershipAcquireEnabled(testCar3.getDealership_id()), false);
+        assertFalse(testDc.getDealershipAcquireEnabled(testCar3.getDealership_id()));
 
         // set to true, verify
         testDc.setDealershipAcquireEnabled(testCar.getDealership_id(), true);
-        assertEquals(testDc.getDealershipAcquireEnabled(testCar.getDealership_id()), true);
+        assertTrue(testDc.getDealershipAcquireEnabled(testCar.getDealership_id()));
 
         // check that other dealer is not affected
-        assertEquals(testDc.getDealershipAcquireEnabled(testCar3.getDealership_id()), false);
+        assertFalse(testDc.getDealershipAcquireEnabled(testCar3.getDealership_id()));
     }
 
     @Test
@@ -167,18 +167,18 @@ class DealershipControllerTest {
         // check car list against known dealer cars
         List<Car> testCarList = testDc.getDealershipCars(testCar.getDealership_id());
         List<Car> myCars = new ArrayList<>(Arrays.asList(testCar, testCar2));
-        assertEquals(testCarList, myCars);
+        assertEquals(myCars, testCarList);
 
         // try to get car list of unknown dealer
         testCarList = testDc.getDealershipCars(testCar4.getDealership_id());
         myCars = new ArrayList<>();
-        assertEquals(testCarList, myCars);
+        assertEquals(myCars, testCarList);
     }
 
     @Test
     void getDealershipIds() {
         // try to get dealer ids when there are no dealers
-        assertEquals(testDc.getDealershipIds(), new ArrayList<String>());
+        assertEquals(new ArrayList<String>(), testDc.getDealershipIds());
 
         // add initial cars to create corresponding dealers
         testDc.addCars(cars);
@@ -190,13 +190,13 @@ class DealershipControllerTest {
         knownDealerIds.sort(null);
         myDealerIds.sort(null);
 
-        assertEquals(myDealerIds, knownDealerIds);
+        assertEquals(knownDealerIds, myDealerIds);
     }
 
     @Test
     void getAllCars() {
         // try to get cars when there are no cars
-        assertEquals(testDc.getAllCars(), new ArrayList<Car>());
+        assertEquals(new ArrayList<Car>(), testDc.getAllCars());
 
         // add initial cars to create corresponding dealers
         testDc.addCars(cars);
@@ -206,6 +206,6 @@ class DealershipControllerTest {
         validCars.sort(null);
         List<Car> myCars = testDc.getAllCars();
         myCars.sort(null);
-        assertEquals(myCars, validCars);
+        assertEquals(validCars, myCars);
     }
 }
