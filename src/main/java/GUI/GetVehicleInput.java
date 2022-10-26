@@ -23,7 +23,7 @@ public class GetVehicleInput {
      */
     protected String receiveCurrency() {
         String userInput = createDialogueBox("Currency Type: ");
-        while (!userInput.matches("[a-zA-Z]")){
+        while (!userInput.matches("[a-zA-Z]+")){
             userInput = createDialogueBox("Currency Type: ");
         }
         return userInput;
@@ -121,9 +121,9 @@ public class GetVehicleInput {
      * @return The acquisition date
      */
     protected long receieveVehDate() {
-        String userInput = createDialogueBox("Acquisition Date");
-        while (!userInput.matches("[0-9]+")) userInput = createDialogueBox("valid Acquisition Date");
-        return Long.parseLong(userInput);
+
+        long ts = System.currentTimeMillis()/1000;
+        return ts;
     }
 
     /**
