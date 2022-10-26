@@ -75,6 +75,12 @@ public class Json {
 					if (carJsonObject.has("acquisition_date")) {
 						acquisitionDate = carJsonObject.get("acquisition_date").getAsLong();
 					}
+					if (carJsonObject.has("dealerName")){
+						dealerName = carJsonObject.get("dealerName").getAsString();
+					}
+					if(carJsonObject.has("currency")){
+						currency = carJsonObject.get("currency").getAsString();
+					}
 
 					Car car = new Car(dealershipID, vehicleType, vehicleManu, vehicleModel, vehicleID, price, acquisitionDate, dealerName, currency);
 					// Array list for storing cars and their attributes
@@ -105,7 +111,8 @@ public class Json {
 	 * CarListDTO. the new file is placed in the resources folder.
 	 *
 	 * @see https://stackoverflow.com/questions/43167016/how-to-keep-list-name-using-gson
-	 * @param cars
+	 * @param cars The list of cars to be exported.
+	 * @param filePath The file path that the export file will go to.
 	 */
 	public void exportFile(List<Car> cars, String filePath) {
 		try (FileWriter fw = new FileWriter(filePath)) {
