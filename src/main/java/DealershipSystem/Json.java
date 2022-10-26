@@ -89,7 +89,7 @@ public class Json {
 				}
 				// This is temporary and only for testing purposes
 				// System.out.println(cars);
-				System.out.println(fileInput);
+				//System.out.println(fileInput);
 
 				// Error for input file if DNE
 			} catch (FileNotFoundException e) {

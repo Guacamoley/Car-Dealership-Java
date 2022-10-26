@@ -131,9 +131,6 @@ public class Interface {
         exportToJSONButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO testing save feature
-                saveSession();
-
                 JFileChooser fc = new JFileChooser();
                 fc.setCurrentDirectory(new File("."));
                 fc.setAcceptAllFileFilterUsed(false);
