@@ -83,7 +83,7 @@ public class Inventory {
      */
     public Status removeIncomingVehicle(Car target) {
         // check if the car has the necessary fields to search and match
-        if ((target.getDealership_id() == null) || (target.getVehicle_id() == null)) {
+        if ((target == null || target.getDealership_id() == null) || (target.getVehicle_id() == null)) {
             return Status.FAILURE;
         } else {
             // based on the car's dealerId, get that dealer's list of cars
@@ -149,7 +149,7 @@ public class Inventory {
     /**
      * export all cars for this dealership to a json file in the resources folder.
      *
-     * @param dealershipId
+     * @param dealershipId the dealership id to export
      */
     public void exportFile(String dealershipId, String fileName) {
         // get the list of cars to be exported
@@ -192,12 +192,12 @@ public class Inventory {
      * inserted
      */
     public String printCars(String dealershipId, String delimiter) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         List<Car> cars = dc.getDealershipCars(dealershipId);
         for (Car c : cars) {
-            result += c.toString() + delimiter;
+            result.append(c.toString()).append(delimiter);
         }
-        return result;
+        return result.toString();
     }
 
 }

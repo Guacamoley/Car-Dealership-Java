@@ -3,7 +3,7 @@ package DealershipSystem;
 /**
  * The car class defines the car object that we use to create the cars for use in the dealerships.
  **/
-public class Car { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
+public class Car implements Comparable<Car> { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
     private String dealership_id;
     private String vehicle_type;
     private String vehicle_manufacturer;
@@ -184,6 +184,23 @@ public class Car { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
                 "currency = " + currency + '\n' +
                 "Loaned = " + loaned + '\n';
 
+    }
+
+    /**
+     * compares cars first by dealership id, then by vehicle id
+     *
+     * @param o the object to be compared.
+     * @return integer consistent with Comparable interface
+     */
+    @Override
+    public int compareTo(Car o) {
+        // first level of comparison is done by dealership id
+        int firstComparison = this.dealership_id.compareTo(o.dealership_id);
+        if (firstComparison != 0){
+            return firstComparison;
+        }
+        // second level of comparison is done by vehicle id
+        return this.vehicle_id.compareTo(o.vehicle_id);
     }
 }
 
