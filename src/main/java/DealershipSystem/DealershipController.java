@@ -121,16 +121,22 @@ public class DealershipController {
         dealership.setCars(c);
     }
 
+    /**
+     * Removes from the specified dealership the specified car. Done by matching
+     * dealership id and vehicle id. Multiple vehicles could be removed if they all match.
+     *
+     * @param dealershipID the dealership id to remove from
+     * @param carID the vehicle id to be removed
+     */
     public void removeCar(String dealershipID, String carID) {
         Dealership dealership = dealerships.get(dealershipID);
         if (dealership != null) {
-            for (Car a : dealership.getCars()) {
-                if (a.getVehicle_id().equalsIgnoreCase(carID)) {
-                    dealership.getCars().remove(a);
+            for (int i = 0; i < dealership.getCars().size(); i++) {
+                Car currentCar = dealership.getCars().get(i);
+                if (currentCar.getVehicle_id().equals(carID)) {
+                    dealership.getCars().remove(i--);
                 }
-
             }
-
         }
     }
 
