@@ -10,7 +10,14 @@ public class Car { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
     private String vehicle_model;
     private String vehicle_id;
     private Double price;
-    private long acquisition_date;
+    private long acquisition_date = System.currentTimeMillis()/1000;
+
+    //New fields from new dealers
+    private String dealerName;
+    private String currency;
+
+    private Boolean loaned;
+
 
     public Car(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, Double price, long acquisition_date) {
         this.dealership_id = dealership_id;
@@ -27,6 +34,43 @@ public class Car { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
         this.vehicle_id = vehicle_id;
     }
 
+    public Car(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, Double price,long acquisition_date, String dealerName, String currency) {
+        this.dealership_id = dealership_id;
+        this.vehicle_type = vehicle_type;
+        this.vehicle_manufacturer = vehicle_manufacturer;
+        this.vehicle_model = vehicle_model;
+        this.vehicle_id = vehicle_id;
+        this.price = price;
+        this.acquisition_date = acquisition_date;
+        //New
+        this.dealerName = dealerName;
+        this.currency = currency;
+        this.loaned = false;
+    }
+
+    public Boolean getLoaned() {
+        return loaned;
+    }
+
+    public void setLoaned(Boolean loaned) {
+        this.loaned = loaned;
+    }
+
+    public String getDealerName() {
+        return dealerName;
+    }
+
+    public void setDealerName(String dealerName) {
+        this.dealerName = dealerName;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
     /**
      * getDealership_id will return the dealership_id from the car object, so it can be assigned to its corresponding dealership.
@@ -140,7 +184,18 @@ public class Car { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
      **/
     @Override
     public String toString() {
-        return "Dealership ID: " + dealership_id + '\n' + "Vehicle Type: " + vehicle_type + '\n' + "Vehicle Manufacturer: " + vehicle_manufacturer + '\n' + "Vehicle Model: " + vehicle_model + '\n' + "Vehicle ID: " + vehicle_id + '\n' + "Price: " + price + '\n' + "Acquisition Date: " + acquisition_date + '\n';
+        return
+                "dealership_id = " + dealership_id + '\n' +
+                "vehicle_type = " + vehicle_type + '\n' +
+                "vehicle_manufacturer = " + vehicle_manufacturer + '\n' +
+                "vehicle_model = " + vehicle_model + '\n' +
+                "vehicle_id = " + vehicle_id + '\n' +
+                "price = " + price + '\n' +
+                "acquisition_date = " + acquisition_date + '\n' +
+                "dealerName = " + dealerName + '\n' +
+                "currency = " + currency + '\n' +
+                "Loaned = " + loaned + '\n';
+
     }
 }
 

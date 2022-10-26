@@ -9,9 +9,11 @@ import DealershipSystem.Car;
 public class CreateCar {
     GetVehicleInput getInput = new GetVehicleInput();
     private String dealerID, vehType, vehManu, vehModel, vehID;
+    //new
+    private String dealerName, currency;
     private Double price;
     private long acqDate;
-    private final Car car = new Car(null, vehType, vehManu, vehModel, vehID, price, acqDate);
+    private final Car car = new Car(null, vehType, vehManu, vehModel, vehID, price,acqDate, dealerName, currency);
 
     public Car addNewVehicle() {
         car.setVehicle_type(getInput.receiveVehType());
