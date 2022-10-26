@@ -18,17 +18,6 @@ public class Car { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
 
     private Boolean loaned;
 
-
-    public Car(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, Double price, long acquisition_date) {
-        this.dealership_id = dealership_id;
-        this.vehicle_type = vehicle_type;
-        this.vehicle_manufacturer = vehicle_manufacturer;
-        this.vehicle_model = vehicle_model;
-        this.vehicle_id = vehicle_id;
-        this.price = price;
-        this.acquisition_date = acquisition_date;
-    }
-
     public Car(String dealership_id, String vehicle_id) {
         this.dealership_id = dealership_id;
         this.vehicle_id = vehicle_id;
@@ -42,7 +31,6 @@ public class Car { //CLASS DIAGRAM IS PUT IN AS "VEHICLE"
         this.vehicle_id = vehicle_id;
         this.price = price;
         this.acquisition_date = acquisition_date;
-        //New
         this.dealerName = dealerName;
         this.currency = currency;
         this.loaned = false;
