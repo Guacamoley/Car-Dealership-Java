@@ -57,7 +57,7 @@ public class xmlDealers {
                 //New Data
                 String dealerName = null;
                 String currency = null;
-
+                Boolean loaned = null;
 
                 dealerName = deal.getDealerName();
                 dealershipID = deal.getDealerId();
@@ -79,7 +79,7 @@ public class xmlDealers {
 
                     }
                     Car car = new Car(dealershipID, vehicleType, vehicleManu, vehicleModel, vehicleID, price, acquisitionDate,
-                            dealerName, currency);
+                            dealerName, currency, loaned);
                     // Array list for storing cars and their attributes
                     cars.add(car);
 

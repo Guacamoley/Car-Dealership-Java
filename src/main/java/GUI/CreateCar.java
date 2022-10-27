@@ -13,7 +13,8 @@ public class CreateCar {
     private String dealerName, currency;
     private Double price;
     private long acqDate;
-    private final Car car = new Car(null, vehType, vehManu, vehModel, vehID, price,acqDate, dealerName, currency);
+    private final Boolean loaned = false;
+    private final Car car = new Car(null, vehType, vehManu, vehModel, vehID, price,acqDate, dealerName, currency, loaned);
 
     public Car addNewVehicle() {
         car.setVehicle_type(getInput.receiveVehType());

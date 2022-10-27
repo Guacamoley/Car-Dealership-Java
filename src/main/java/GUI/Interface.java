@@ -40,6 +40,7 @@ public class Interface {
     private JButton importXMLButton;
     private JButton saveButton;
     private JButton editDealerNameButton;
+    private JButton setLoanButton;
     // the inventory of cars and dealerships being worked on
     private final Inventory i = new Inventory();
     // holder for whichever dealership is currently selected
@@ -234,7 +235,12 @@ public class Interface {
         importXMLButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            }
+        });
+        setLoanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setLoanStatus();
             }
         });
     }
@@ -275,6 +281,7 @@ public class Interface {
             enableRadioButton.setSelected(canAcquire);
             disableRadioButton.setSelected(!canAcquire);
         }
+        outputArea.setText(i.printCars(currentDealershipId, "\n"));
     }
 
     // Edits the dealership name for each vehicle to user specified name.
@@ -284,6 +291,37 @@ public class Interface {
             car.setDealerName(dealerName);
         }
         outputArea.setText("Dealer name for dealerID: " + currentDealershipId + " set to " + dealerName);
+    }
+
+    // Get user input for vehicle to be loaned. If vehicle is not loaned, it will be set to loaned, and vice-versa.
+    // User feedback will also be provided after based on the vehicles loan status or if it exists.
+    private void setLoanStatus() {
+        printCarLoanStatus();
+        String carToBeLoaned = getInput.receiveVehID();
+        for (Car car : i.getDealerCars(currentDealershipId)) {
+            if (car.getVehicle_id().matches(carToBeLoaned)) {
+                car.setLoaned(!car.getLoaned());
+                if (!car.getLoaned())
+                    outputArea.setText("Vehicle " + carToBeLoaned + " is no longer loaned.");
+                else outputArea.setText("Vehicle " + carToBeLoaned + " is now loaned.");
+                break;
+            } else outputArea.setText("No vehicle was found for ID " + carToBeLoaned);
+        }
+    }
+
+    // Helper method for setLoanStatus. Prints out a list of loaned and not loaned vehicle ids.
+    private void printCarLoanStatus() {
+        outputArea.setText("Available Vehicles: \n");
+        for (Car car : i.getDealerCars(currentDealershipId)) {
+            if (!car.getLoaned()) {
+                outputArea.append(car.getVehicle_id() + "\n");
+            }
+        }
+        outputArea.append("Loaned Vehicles: \n");
+        for (Car car : i.getDealerCars(currentDealershipId)) {
+            if (car.getLoaned())
+                outputArea.append(car.getVehicle_id() + "\n");
+        }
     }
 
     /**
@@ -414,6 +452,9 @@ public class Interface {
         editDealerNameButton = new JButton();
         editDealerNameButton.setText("Edit Dealer Name");
         guiPanel.add(editDealerNameButton, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        setLoanButton = new JButton();
+        setLoanButton.setText("Set Loan");
+        guiPanel.add(setLoanButton, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ButtonGroup buttonGroup;
         buttonGroup = new ButtonGroup();
         buttonGroup.add(enableRadioButton);

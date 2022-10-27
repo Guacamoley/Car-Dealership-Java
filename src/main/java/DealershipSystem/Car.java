@@ -23,7 +23,8 @@ public class Car implements Comparable<Car> { //CLASS DIAGRAM IS PUT IN AS "VEHI
         this.vehicle_id = vehicle_id;
     }
 
-    public Car(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, Double price,long acquisition_date, String dealerName, String currency) {
+    public Car(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model,
+               String vehicle_id, Double price, long acquisition_date, String dealerName, String currency, Boolean loaned) {
         this.dealership_id = dealership_id;
         this.vehicle_type = vehicle_type;
         this.vehicle_manufacturer = vehicle_manufacturer;
@@ -33,7 +34,7 @@ public class Car implements Comparable<Car> { //CLASS DIAGRAM IS PUT IN AS "VEHI
         this.acquisition_date = acquisition_date;
         this.dealerName = dealerName;
         this.currency = currency;
-        this.loaned = false;
+        this.loaned = loaned;
     }
 
     public Boolean getLoaned() {

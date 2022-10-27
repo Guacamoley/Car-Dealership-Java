@@ -38,6 +38,7 @@ public class Json {
 					//New Data
 					String dealerName = null;
 					String currency = null;
+					Boolean loaned = null;
 
 					/*
 					 * -Input validation if the object attributes are empty inside the object to
@@ -81,8 +82,11 @@ public class Json {
 					if(carJsonObject.has("currency")){
 						currency = carJsonObject.get("currency").getAsString();
 					}
+					if(carJsonObject.has("loaned")){
+						loaned = carJsonObject.get("loaned").getAsBoolean();
+					}
 
-					Car car = new Car(dealershipID, vehicleType, vehicleManu, vehicleModel, vehicleID, price, acquisitionDate, dealerName, currency);
+					Car car = new Car(dealershipID, vehicleType, vehicleManu, vehicleModel, vehicleID, price, acquisitionDate, dealerName, currency, loaned);
 					// Array list for storing cars and their attributes
 					cars.add(car);
 
