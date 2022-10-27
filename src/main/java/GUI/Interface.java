@@ -33,7 +33,7 @@ public class Interface {
     private JButton listVehiclesButton;
     private JComboBox<String> dealershipSelector;
     private JButton addVehicleButton;
-    private JButton inputFileChooser;
+    private JButton importJSON;
     private JRadioButton enableRadioButton;
     private JRadioButton disableRadioButton;
     private JButton transferButton;
@@ -154,7 +154,7 @@ public class Interface {
          * their respective dealerships. This also populates the dealership drop-down
          * selector.
          */
-        inputFileChooser.addActionListener(new ActionListener() {
+        importJSON.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fc = new JFileChooser();
@@ -421,9 +421,9 @@ public class Interface {
         removeVehicleButton = new JButton();
         removeVehicleButton.setText("Remove Vehicle");
         guiPanel.add(removeVehicleButton, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        inputFileChooser = new JButton();
-        inputFileChooser.setText("Select Input File");
-        guiPanel.add(inputFileChooser, new com.intellij.uiDesigner.core.GridConstraints(2, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        importJSON = new JButton();
+        importJSON.setText("Import JSON");
+        guiPanel.add(importJSON, new com.intellij.uiDesigner.core.GridConstraints(2, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         addVehicleButton = new JButton();
         addVehicleButton.setText("Add Vehicle");
         guiPanel.add(addVehicleButton, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

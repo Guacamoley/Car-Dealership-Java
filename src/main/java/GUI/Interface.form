@@ -52,12 +52,12 @@
               <text value="Remove Vehicle"/>
             </properties>
           </component>
-          <component id="df955" class="javax.swing.JButton" binding="inputFileChooser">
+          <component id="df955" class="javax.swing.JButton" binding="importJSON">
             <constraints>
               <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Select Input File"/>
+              <text value="Import JSON"/>
             </properties>
           </component>
           <component id="bf0e9" class="javax.swing.JButton" binding="addVehicleButton" default-binding="true">
