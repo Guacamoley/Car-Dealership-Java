@@ -27,10 +27,9 @@ public class xmlDealers {
     }
 
     //Method for deserialzing/unmarshalling the xml file
-    public List<Car> xmlUnmarshal(){
+    public List<Car> xmlUnmarshal(File file){
         List<Car> cars = new ArrayList<>();
         try {
-            File file = new File("resources/dealer.xml");
 
             JAXBContext jaxbContext = JAXBContext.newInstance(xmlDealers.class);
 

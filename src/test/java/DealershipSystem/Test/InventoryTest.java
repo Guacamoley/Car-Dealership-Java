@@ -28,7 +28,7 @@ class InventoryTest {
 
     // private helper method for testing loads a preset file
     private List<Status> loadFile(){
-        return testInventory.importFile(new File("resources\\input.json"));
+        return testInventory.importFile(new File("resources\\input.json"), "json");
     }
 
     @BeforeEach
@@ -201,7 +201,7 @@ class InventoryTest {
 
         // export, then import the file, validate dealer list sizes
         testInventory.exportFile("12513", "resources\\testOutput.json");
-        testInventory.importFile(new File("resources\\testOutput.json"));
+        testInventory.importFile(new File("resources\\testOutput.json"), "json");
         assertEquals(6, testInventory.getDealerCars("12513").size());
         assertEquals(1, testInventory.getDealerCars("77338").size());
     }
@@ -215,7 +215,7 @@ class InventoryTest {
 
         // export, then import the file, validate dealer list sizes
         testInventory.exportSession("resources\\session.json");
-        testInventory.importFile(new File("resources\\session.json"));
+        testInventory.importFile(new File("resources\\session.json"), "json");
         assertEquals(6, testInventory.getDealerCars("12513").size());
         assertEquals(2, testInventory.getDealerCars("77338").size());
     }

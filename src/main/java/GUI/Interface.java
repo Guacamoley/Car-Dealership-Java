@@ -164,7 +164,22 @@ public class Interface {
                 fc.setCurrentDirectory(new File("."));
                 fc.showOpenDialog(panelMain);
                 File file = fc.getSelectedFile();
-                i.importFile(file);
+                i.importFile(file, "json");
+                updateDealershipComboBox(dealershipSelector);
+                outputArea.setText("File " + file + " has been chosen");
+            }
+        });
+        importXMLButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fc = new JFileChooser();
+                fc.setAcceptAllFileFilterUsed(false);
+                FileNameExtensionFilter fileFilter = new FileNameExtensionFilter(".xml", "xml");
+                fc.addChoosableFileFilter(fileFilter);
+                fc.setCurrentDirectory(new File("."));
+                fc.showOpenDialog(panelMain);
+                File file = fc.getSelectedFile();
+                i.importFile(file, "xml");
                 updateDealershipComboBox(dealershipSelector);
                 outputArea.setText("File " + file + " has been chosen");
             }
@@ -232,11 +247,7 @@ public class Interface {
                 saveSession();
             }
         });
-        importXMLButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+
         setLoanButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -375,7 +386,7 @@ public class Interface {
         if (saveFile.isFile()) {
 
             // load file into current system
-            i.importFile(saveFile);
+            i.importFile(saveFile, "json");
 
             // update drop-down selector and GUI message
             updateDealershipComboBox(dealershipSelector);

@@ -27,6 +27,8 @@ public class Inventory {
      */
     private final Json c = new Json();
 
+    private final xmlDealers xml = new xmlDealers();
+
     // CONSTRUCTORS
 
     public Inventory() {
@@ -45,8 +47,12 @@ public class Inventory {
      * @return the list of status enumerations indicating whether each car
      * was successfully added.
      */
-    public List<Status> importFile(File file) {
-        return dc.addCars(c.readFile(file));
+    public List<Status> importFile(File file, String extension) {
+        if (extension.matches("json"))
+            return dc.addCars(c.readFile(file));
+        else if(extension.matches("xml"))
+            return dc.addCars(xml.xmlUnmarshal(file));
+        return null;
     }
 
     /**
