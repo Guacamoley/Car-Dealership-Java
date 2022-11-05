@@ -3,7 +3,6 @@ package GUI;
 import DealershipSystem.Car;
 import DealershipSystem.Inventory;
 import DealershipSystem.Status;
-import DealershipSystem.TransferInventory;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -215,7 +214,6 @@ public class Interface {
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TransferInventory transferInventory = new TransferInventory();
                 outputArea.setText("Select a dealership to transfer to: \n");
                 printComboBoxItems(dealershipSelector);
                 String dealerToTransfer = getInput.receiveDealerID();
@@ -223,13 +221,16 @@ public class Interface {
                 if (!i.getDealerAcquisition(dealerToTransfer) || dealerToTransfer.equalsIgnoreCase(currentDealershipId)) {
                     outputArea.setText("Dealership you are transferring to either doesn't exist \nor you're trying to transfer" + " into the current dealership.");
                 } else {
-                    outputArea.setText("Cars available for transfer:\n" + i.printCars(currentDealershipId, "\n"));
+                    outputArea.setText("Cars available for transfer\n");
+                    printCarLoanStatus();
                     String carToTransfer = getInput.receiveVehID();
-
+                    Car carTransfer = getCarObject(currentDealershipId, carToTransfer);
                     if (!i.getDealerCars(currentDealershipId).toString().contains(carToTransfer))
                         outputArea.setText("Car with ID " + carToTransfer + " does not exist!");
-                    else {
-                        transferInventory.transferCar(currentDealershipId, dealerToTransfer, carToTransfer, i);
+                    if (carTransfer.getLoaned()) {
+                        outputArea.setText("Car with ID " + carToTransfer + " is currently loaned!");
+                    } else {
+                        i.transferCar(currentDealershipId, dealerToTransfer, carToTransfer);
                         outputArea.setText("Successfully transferred vehicle " + carToTransfer + " to " + dealerToTransfer);
                     }
                 }
@@ -332,6 +333,23 @@ public class Interface {
         for (Car car : i.getDealerCars(currentDealershipId)) {
             if (car.getLoaned())
                 outputArea.append(car.getVehicle_id() + "\n");
+        }
+    }
+
+    // Returns a car object from specified dealer and carID
+    private Car getCarObject(String dealerID, String carID) {
+        for (Car car : i.getDealerCars(dealerID)) {
+            if (car.getVehicle_id().equals(carID)) {
+                return car;
+            }
+        }
+        return null;
+    }
+
+    // Prints all car IDs into into output area
+    private void printCarID(String dealerID) {
+        for (Car car : i.getDealerCars(dealerID)) {
+            outputArea.append("\n" + car.getVehicle_id());
         }
     }
 
