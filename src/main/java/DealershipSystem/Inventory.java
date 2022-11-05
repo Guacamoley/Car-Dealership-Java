@@ -206,4 +206,21 @@ public class Inventory {
         return result.toString();
     }
 
+    /**
+     * Transfers a car between two dealerships from user input.
+     *
+     * @param dealership1 The dealership to transfer a vehicle from.
+     * @param dealership2 The dealership to transfer a vehicle to.
+     * @param vehicleID   The car that is getting transferred.
+     */
+    public void transferCar(String dealership1, String dealership2, String vehicleID) {
+        for (Car car : getDealerCars(dealership1)) {
+            if (car.getVehicle_id().equalsIgnoreCase(vehicleID)) {
+                car.setDealership_id(dealership2);
+                addIncomingVehicle(car);
+                getDealerCars(dealership1).remove(car);
+                break;
+            }
+        }
+    }
 }
