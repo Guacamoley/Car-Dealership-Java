@@ -8,6 +8,40 @@ The **Dealership Inventory Management System** is a Java-based software system d
 
 Repository Link: [Car Dealership Java](https://github.com/Guacamoley/Car-Dealership-Java)
 
+## Getting Started
+
+To get started with the **Dealership Inventory Management System**, follow the instructions below:
+
+1. Clone the repository to your local machine:
+
+   ```bash
+   git clone https://github.com/yourusername/Car-Dealershio-Java.git
+
+## How to Run
+
+To run the **Dealership Inventory Management System**, follow these steps:
+
+1. Head into the `src` folder of the repository.
+
+2. Navigate to the `Main` folder within the `src` folder.
+
+3. Locate the `Main.java` file.
+
+4. Run the `Main.java` file using your preferred Java development environment or IDE.
+
+   - If you are using an IDE like IntelliJ IDEA or Eclipse, you can right-click on the `Main.java` file and select "Run" to execute the program.
+
+   - If you prefer using the command line, navigate to the `Main` folder and compile and run the program with the following commands:
+   
+     ```bash
+     javac Main.java
+     java Main
+     ```
+
+5. The program will start, and you can use the graphical user interface (GUI) to perform various operations and manage the dealership's inventory efficiently.
+
+Enjoy using the **Dealership Inventory Management System** for your car dealership operations!
+
 ## Features
 
 ### 1. Read JSON Vehicle Data
@@ -65,10 +99,6 @@ Dealers can transfer inventory between each other, streamlining inventory manage
 ### 14. Graphical User Interface (GUI)
 
 The system includes a user-friendly graphical interface, allowing users to perform operations through a point-and-click interface for enhanced usability.
-
-## Getting Started
-
-To get started with the **Dealership Inventory Management System**, follow the instructions in the repository's README file. The README provides guidance on setup, dependencies, and usage, ensuring a smooth experience for users.
 
 ## Acknowledgments
 
