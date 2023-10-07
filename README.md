@@ -1,6 +1,6 @@
 # Dealership Inventory Management System
 
-![Car Dealership](https://github.com/Guacamoley/Car-Dealership-Java/resources/dealership.jpg)
+![Dealership](dealership.jpg)
 
 ## Introduction
 
@@ -78,8 +78,8 @@ For additional details and usage guidelines, refer to the repository's documenta
 
 *Note: The loaning of cars, as mentioned in Feature 10, is handled by separate software and is not part of this project's scope.*
 
-![Car Dealership](https://github.com/Guacamoley/Car-Dealership-Java/raw/main/dealership.jpg)
+![Dealership](dealership.jpg)
 
-*Image Source: [Unsplash](https://unsplash.com/photos/P0IvTlcl_s0)*
+*Image Source: [[Unsplash](https://unsplash.com/photos/P0IvTlcl_s0)](https://unsplash.com/photos/3WAMh1omVAY)*
 
 Enjoy using the **Dealership Inventory Management System** for your car dealership operations!
