@@ -1,6 +1,6 @@
 # Dealership Inventory Management System
 
-![Car Dealership](https://github.com/Guacamoley/Car-Dealership-Java/raw/main/dealership.jpg)
+![Car Dealership](https://github.com/Guacamoley/Car-Dealership-Java/resources/dealership.jpg)
 
 ## Introduction
 
